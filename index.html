@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>دانلود اپلیکیشن بازرگانی سعادت</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Vazirmatn',sans-serif;
+}
+
+body{
+
+background:linear-gradient(135deg,#0f172a,#1e293b,#111827);
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+min-height:100vh;
+
+padding:20px;
+
+overflow:hidden;
+
+}
+
+body::before{
+
+content:"";
+
+position:absolute;
+
+width:350px;
+
+height:350px;
+
+background:#ff006e;
+
+filter:blur(180px);
+
+top:-120px;
+
+right:-120px;
+
+opacity:.4;
+
+}
+
+body::after{
+
+content:"";
+
+position:absolute;
+
+width:300px;
+
+height:300px;
+
+background:#3b82f6;
+
+filter:blur(180px);
+
+bottom:-120px;
+
+left:-120px;
+
+opacity:.35;
+
+}
+
+.card{
+
+position:relative;
+
+z-index:10;
+
+width:100%;
+
+max-width:420px;
+
+background:rgba(255,255,255,.08);
+
+backdrop-filter:blur(18px);
+
+border:1px solid rgba(255,255,255,.12);
+
+border-radius:30px;
+
+padding:28px;
+
+text-align:center;
+
+box-shadow:0 20px 60px rgba(0,0,0,.35);
+
+animation:show .8s;
+
+}
+
+@keyframes show{
+
+from{
+
+opacity:0;
+
+transform:translateY(40px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+.logo{
+
+width:100%;
+
+border-radius:20px;
+
+margin-bottom:25px;
+
+box-shadow:0 15px 35px rgba(0,0,0,.3);
+
+}
+
+h1{
+
+color:#fff;
+
+font-size:30px;
+
+font-weight:800;
+
+margin-bottom:10px;
+
+}
+
+.desc{
+
+color:#d1d5db;
+
+line-height:2;
+
+margin-bottom:25px;
+
+font-size:15px;
+
+}
+
+.box{
+
+background:rgba(255,255,255,.06);
+
+border-radius:18px;
+
+padding:18px;
+
+margin-bottom:25px;
+
+}
+
+.box div{
+
+color:#fff;
+
+padding:8px 0;
+
+font-size:15px;
+
+border-bottom:1px solid rgba(255,255,255,.08);
+
+}
+
+.box div:last-child{
+
+border:none;
+
+}
+
+.download{
+
+display:block;
+
+text-decoration:none;
+
+padding:18px;
+
+border-radius:18px;
+
+background:linear-gradient(90deg,#ff006e,#ff4d9d);
+
+color:#fff;
+
+font-size:20px;
+
+font-weight:700;
+
+transition:.3s;
+
+}
+
+.download:hover{
+
+transform:translateY(-3px);
+
+box-shadow:0 12px 30px rgba(255,0,110,.45);
+
+}
+
+.note{
+
+margin-top:20px;
+
+font-size:13px;
+
+color:#d1d5db;
+
+line-height:1.9;
+
+}
+
+.footer{
+
+margin-top:25px;
+
+font-size:12px;
+
+color:#94a3b8;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+<img src="logo.jpg" class="logo">
+
+<h1>بازرگانی سعادت</h1>
+
+<div class="desc">
+
+اپلیکیشن اختصاصی لیست قیمت نمایندگان فروش
+
+<br>
+
+برای دریافت آخرین نسخه روی دکمه زیر کلیک کنید.
+
+</div>
+
+<div class="box">
+
+<div>📦 نسخه : <b>1.0</b></div>
+
+<div>📱 سیستم عامل : Android</div>
+
+<div>💾 حجم فایل : 9 MB</div>
+
+</div>
+
+<a class="download"
+
+href="https://github.com/sampixel1-ctrl/saadat-news/releases/download/v1.0/saadat.apk">
+
+📥 دانلود آخرین نسخه
+
+</a>
+
+<div class="note">
+
+در صورتی که هنگام نصب پیام امنیتی مشاهده کردید،
+
+گزینه <b>Install Anyway</b> یا <b>نصب</b> را انتخاب کنید.
+
+</div>
+
+<div class="footer">
+
+© SAADAT Trading Group
+
+</div>
+
+</div>
+
+</body>
+
+</html>
