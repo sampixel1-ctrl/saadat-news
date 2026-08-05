@@ -4,7 +4,9 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
 
 <title>دانلود اپلیکیشن بازرگانی سعادت</title>
 
@@ -21,111 +23,33 @@ font-family:'Vazirmatn',sans-serif;
 
 body{
 
-background:linear-gradient(135deg,#0f172a,#1e293b,#111827);
+background:#f3f3f3;
+
+overflow-x:hidden;
+
+direction:rtl;
+
+}
+
+.header{
+
+background:#d10067;
+
+height:85px;
 
 display:flex;
 
-justify-content:center;
-
 align-items:center;
 
-min-height:100vh;
+justify-content:center;
 
-padding:20px;
+color:white;
 
-overflow:hidden;
+font-size:28px;
 
-}
+font-weight:700;
 
-body::before{
-
-content:"";
-
-position:absolute;
-
-width:350px;
-
-height:350px;
-
-background:#ff006e;
-
-filter:blur(180px);
-
-top:-120px;
-
-right:-120px;
-
-opacity:.4;
-
-}
-
-body::after{
-
-content:"";
-
-position:absolute;
-
-width:300px;
-
-height:300px;
-
-background:#3b82f6;
-
-filter:blur(180px);
-
-bottom:-120px;
-
-left:-120px;
-
-opacity:.35;
-
-}
-
-.card{
-
-position:relative;
-
-z-index:10;
-
-width:100%;
-
-max-width:420px;
-
-background:rgba(255,255,255,.08);
-
-backdrop-filter:blur(18px);
-
-border:1px solid rgba(255,255,255,.12);
-
-border-radius:30px;
-
-padding:28px;
-
-text-align:center;
-
-box-shadow:0 20px 60px rgba(0,0,0,.35);
-
-animation:show .8s;
-
-}
-
-@keyframes show{
-
-from{
-
-opacity:0;
-
-transform:translateY(40px);
-
-}
-
-to{
-
-opacity:1;
-
-transform:translateY(0);
-
-}
+box-shadow:0 5px 15px rgba(0,0,0,.2);
 
 }
 
@@ -133,17 +57,39 @@ transform:translateY(0);
 
 width:100%;
 
-border-radius:20px;
+display:block;
 
-margin-bottom:25px;
-
-box-shadow:0 15px 35px rgba(0,0,0,.3);
+margin:auto;
 
 }
 
-h1{
+.container{
 
-color:#fff;
+width:92%;
+
+max-width:500px;
+
+margin:auto;
+
+}
+
+.card{
+
+background:white;
+
+border-radius:20px;
+
+padding:25px;
+
+margin-top:20px;
+
+box-shadow:0 8px 25px rgba(0,0,0,.12);
+
+text-align:center;
+
+}
+
+.title{
 
 font-size:30px;
 
@@ -153,45 +99,15 @@ margin-bottom:10px;
 
 }
 
-.desc{
+.text{
 
-color:#d1d5db;
+font-size:16px;
 
 line-height:2;
 
-margin-bottom:25px;
-
-font-size:15px;
-
-}
-
-.box{
-
-background:rgba(255,255,255,.06);
-
-border-radius:18px;
-
-padding:18px;
+color:#555;
 
 margin-bottom:25px;
-
-}
-
-.box div{
-
-color:#fff;
-
-padding:8px 0;
-
-font-size:15px;
-
-border-bottom:1px solid rgba(255,255,255,.08);
-
-}
-
-.box div:last-child{
-
-border:none;
 
 }
 
@@ -199,19 +115,19 @@ border:none;
 
 display:block;
 
+background:#d10067;
+
+color:white;
+
 text-decoration:none;
 
 padding:18px;
 
 border-radius:18px;
 
-background:linear-gradient(90deg,#ff006e,#ff4d9d);
+font-size:22px;
 
-color:#fff;
-
-font-size:20px;
-
-font-weight:700;
+font-weight:bold;
 
 transition:.3s;
 
@@ -219,31 +135,45 @@ transition:.3s;
 
 .download:hover{
 
-transform:translateY(-3px);
+background:#ef0d7d;
 
-box-shadow:0 12px 30px rgba(255,0,110,.45);
+transform:scale(1.03);
 
 }
 
-.note{
+.info{
 
-margin-top:20px;
+margin-top:25px;
 
-font-size:13px;
+font-size:15px;
 
-color:#d1d5db;
+line-height:2.2;
 
-line-height:1.9;
+color:#666;
+
+}
+
+.version{
+
+margin-top:35px;
+
+text-align:center;
+
+color:#666;
+
+font-size:15px;
 
 }
 
 .footer{
 
-margin-top:25px;
+margin:30px;
 
-font-size:12px;
+text-align:center;
 
-color:#94a3b8;
+color:#888;
+
+font-size:14px;
 
 }
 
@@ -253,27 +183,28 @@ color:#94a3b8;
 
 <body>
 
-<div class="card">
+<div class="header">
 
-<img src="logo.png" class="logo">
-
-<h1>بازرگانی سعادت</h1>
-
-<div class="desc">
-
-اپلیکیشن اختصاصی
-
-<br>
+بازرگانی سعادت
 
 </div>
 
-<div class="box">
+<img src="logo.png" class="logo">
 
-<div>📦 نسخه : <b>1.0</b></div>
+<div class="container">
 
-<div>📱 سیستم عامل : Android</div>
+<div class="card">
 
-<div>💾 حجم فایل : 9 MB</div>
+<div class="title">
+
+دانلود اپلیکیشن
+
+</div>
+
+<div class="text">
+
+آخرین نسخه اپلیکیشن اختصاصی بازرگانی سعادت
+<br><br>
 
 </div>
 
@@ -281,21 +212,35 @@ color:#94a3b8;
 
 href="https://github.com/sampixel1-ctrl/saadat-news/releases/download/v1.0/saadat.apk">
 
-📥 دانلود آخرین نسخه
+⬇ دانلود آخرین نسخه
 
 </a>
 
-<div class="note">
+<div class="info">
 
-در صورتی که هنگام نصب پیام امنیتی مشاهده کردید،
+📦 نسخه : 1.0
 
-گزینه <b>Install Anyway</b> یا <b>نصب</b> را انتخاب کنید.
+<br>
+
+📱 مناسب گوشی‌های اندروید
+
+<br>
+
+💾 حجم فایل : 9 مگابایت
+
+</div>
+
+</div>
+
+<div class="version">
+
+SAADAT APP Version 1.0
 
 </div>
 
 <div class="footer">
 
-© SAADAT Trading Group
+© 2026 SAADAT Trading Group
 
 </div>
 
