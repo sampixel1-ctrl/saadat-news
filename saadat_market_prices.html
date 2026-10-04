@@ -1,12 +1,10 @@
-```html
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#101b2b">
-  <title>قیمت روز بازار | بازرگانی سعادت</title>
+  <title>قیمت‌های بازار | بازرگانی سعادت</title>
 
   <style>
     * {
@@ -14,18 +12,15 @@
       -webkit-tap-highlight-color: transparent;
     }
 
-    html {
+    html, body {
+      margin: 0;
       width: 100%;
       min-height: 100%;
       overflow-x: hidden;
     }
 
     body {
-      margin: 0;
-      padding: 12px;
-      width: 100%;
-      min-height: 100vh;
-      overflow-x: hidden;
+      padding: 8px;
       background: #101b2b;
       color: #f5f7ff;
       font-family: Tahoma, Arial, sans-serif;
@@ -34,38 +29,8 @@
 
     .container {
       width: 100%;
-      max-width: 900px;
+      max-width: 600px;
       margin: 0 auto;
-    }
-
-    .header {
-      padding: 18px 14px;
-      margin-bottom: 14px;
-      background: #071321;
-      border: 1px solid #244664;
-      border-radius: 16px;
-      text-align: center;
-    }
-
-    .brand {
-      color: #ff9d24;
-      font-size: 14px;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: 22px;
-      line-height: 1.8;
-      color: #ffffff;
-    }
-
-    .subtitle {
-      margin-top: 5px;
-      color: #9fcaff;
-      font-size: 12px;
-      line-height: 1.8;
     }
 
     .status-bar {
@@ -74,9 +39,10 @@
       align-items: center;
       gap: 7px;
       flex-wrap: wrap;
-      margin-top: 13px;
-      padding: 9px;
+      margin: 4px 0 12px;
+      padding: 8px;
       background: #10263a;
+      border: 1px solid #244664;
       border-radius: 9px;
       color: #b9d9f5;
       font-size: 11px;
@@ -100,8 +66,8 @@
     }
 
     .section-title {
-      margin: 18px 3px 12px;
-      font-size: 15px;
+      margin: 10px 3px;
+      font-size: 14px;
       font-weight: bold;
       color: #ffbd66;
     }
@@ -109,51 +75,49 @@
     .grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 11px;
+      gap: 8px;
       width: 100%;
     }
 
     .card {
       min-width: 0;
-      padding: 17px 8px;
+      padding: 12px 5px;
       text-align: center;
       background: linear-gradient(145deg, #142b40, #071321);
       border: 1px solid #244664;
-      border-radius: 14px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+      border-radius: 11px;
     }
 
     .icon {
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 44px;
-      height: 44px;
-      margin: 0 auto 10px;
-      border-radius: 12px;
+      width: 34px;
+      height: 34px;
+      margin: 0 auto 7px;
+      border-radius: 9px;
       background: #21374a;
       color: #ffb547;
-      font-size: 25px;
+      font-size: 21px;
     }
 
     .name {
-      min-height: 42px;
+      min-height: 38px;
       display: flex;
       justify-content: center;
       align-items: center;
       color: #c3ddf5;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: bold;
-      line-height: 1.9;
+      line-height: 1.7;
       overflow-wrap: anywhere;
     }
 
     .price {
-      margin-top: 12px;
-      font-family: Tahoma, Arial, sans-serif;
-      font-size: clamp(17px, 4.5vw, 23px);
+      margin: 9px 0 4px;
+      font-size: clamp(15px, 4vw, 20px);
       font-weight: bold;
-      line-height: 1.7;
+      line-height: 1.6;
       direction: ltr;
       overflow-wrap: anywhere;
       word-break: break-word;
@@ -161,9 +125,9 @@
     }
 
     .unit {
-      margin-top: 5px;
+      margin-top: 4px;
       color: #8fa9c1;
-      font-size: 11px;
+      font-size: 10px;
     }
 
     .same {
@@ -179,59 +143,61 @@
     }
 
     .footer {
-      margin: 18px 0 8px;
-      padding: 13px 10px;
+      margin: 14px 0 8px;
+      padding: 10px 5px;
       text-align: center;
       border-top: 1px solid #244664;
       color: #8fa9c1;
-      font-size: 11px;
-      line-height: 2.2;
+      font-size: 10px;
+      line-height: 2;
     }
 
-    /* گوشی‌های خیلی کوچک */
     @media (max-width: 340px) {
       body {
-        padding: 7px;
+        padding: 5px;
       }
 
       .grid {
-        gap: 7px;
+        gap: 6px;
       }
 
       .card {
-        padding: 13px 5px;
+        padding: 10px 3px;
       }
 
       .name {
-        font-size: 12px;
+        font-size: 11px;
       }
 
       .price {
-        font-size: 16px;
-      }
-
-      h1 {
-        font-size: 19px;
+        font-size: 14px;
       }
     }
 
-    /* تبلت و صفحه‌های بزرگ */
     @media (min-width: 700px) {
       body {
-        padding: 22px;
+        padding: 14px;
+      }
+
+      .container {
+        max-width: 750px;
       }
 
       .grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 16px;
+        gap: 12px;
       }
 
       .card {
-        padding: 23px 12px;
+        padding: 18px 8px;
+      }
+
+      .name {
+        font-size: 13px;
       }
 
       .price {
-        font-size: 25px;
+        font-size: 21px;
       }
     }
   </style>
@@ -240,65 +206,30 @@
 <body>
   <main class="container">
 
-    <header class="header">
-      <div class="brand">بازرگانی سعادت</div>
-      <h1>قیمت روز بازار</h1>
-      <div class="subtitle">نرخ ارز، طلا و سکه</div>
-
-      <div class="status-bar">
-        <span id="statusDot" class="status-dot"></span>
-        <span id="status">در حال دریافت قیمت‌ها...</span>
-      </div>
-    </header>
+    <div class="status-bar">
+      <span id="statusDot" class="status-dot"></span>
+      <span id="status">در حال دریافت قیمت‌ها...</span>
+    </div>
 
     <div class="section-title">قیمت‌های لحظه‌ای</div>
 
-    <section class="grid" id="prices">
-      <article class="card">
-        <div class="name">در حال بارگذاری...</div>
-      </article>
-    </section>
+    <section class="grid" id="prices"></section>
 
     <footer class="footer">
-      تمامی قیمت‌ها به تومان هستند.<br>
-      منبع اطلاعات: TGJU<br>
-      بررسی خودکار قیمت‌ها هر ۶۰ ثانیه
+      قیمت‌ها به تومان هستند.<br>
+      منبع: TGJU · بررسی خودکار هر ۶۰ ثانیه
     </footer>
 
   </main>
 
   <script>
     const items = [
-      {
-        id: "price_dollar_rl",
-        name: "دلار آمریکا",
-        icon: "$"
-      },
-      {
-        id: "price_eur",
-        name: "یورو",
-        icon: "€"
-      },
-      {
-        id: "sekeb",
-        name: "سکه بهار آزادی (قدیم)",
-        icon: "◉"
-      },
-      {
-        id: "sekee",
-        name: "سکه امامی (جدید)",
-        icon: "◎"
-      },
-      {
-        id: "geram18",
-        name: "طلای ۱۸ عیار",
-        icon: "◆"
-      },
-      {
-        id: "geram24",
-        name: "طلای ۲۴ عیار",
-        icon: "✦"
-      }
+      { id: "price_dollar_rl", name: "دلار آمریکا", icon: "$" },
+      { id: "price_eur", name: "یورو", icon: "€" },
+      { id: "sekeb", name: "سکه بهار آزادی (قدیم)", icon: "◉" },
+      { id: "sekee", name: "سکه امامی (جدید)", icon: "◎" },
+      { id: "geram18", name: "طلای ۱۸ عیار", icon: "◆" },
+      { id: "geram24", name: "طلای ۲۴ عیار", icon: "✦" }
     ];
 
     const previousPrices = {};
@@ -311,16 +242,15 @@
     }
 
     function createCards() {
-      const grid = document.getElementById("prices");
-
-      grid.innerHTML = items.map(item => `
-        <article class="card" id="card-${item.id}">
-          <div class="icon">${item.icon}</div>
-          <div class="name">${item.name}</div>
-          <div class="price same">---</div>
-          <div class="unit">تومان</div>
-        </article>
-      `).join("");
+      document.getElementById("prices").innerHTML =
+        items.map(item => `
+          <article class="card" id="card-${item.id}">
+            <div class="icon">${item.icon}</div>
+            <div class="name">${item.name}</div>
+            <div class="price same">---</div>
+            <div class="unit">تومان</div>
+          </article>
+        `).join("");
     }
 
     function updateCard(item, data) {
@@ -364,7 +294,7 @@
       const status = document.getElementById("status");
       const dot = document.getElementById("statusDot");
 
-      status.textContent = "در حال به‌روزرسانی...";
+      status.textContent = "در حال بررسی قیمت‌ها...";
       dot.className = "status-dot";
 
       try {
@@ -399,10 +329,9 @@
         let received = 0;
 
         items.forEach(item => {
-          if (
-            dataByName[item.id] &&
-            updateCard(item, dataByName[item.id])
-          ) {
+          const data = dataByName[item.id];
+
+          if (data && updateCard(item, data)) {
             received++;
           }
         });
@@ -419,8 +348,7 @@
         }
 
       } catch (error) {
-        status.textContent =
-          "دریافت قیمت ناموفق بود؛ اتصال را بررسی کنید.";
+        status.textContent = "خطا در دریافت قیمت‌ها؛ اتصال را بررسی کنید.";
         dot.className = "status-dot error";
         console.error("TGJU update error:", error);
 
@@ -435,4 +363,3 @@
   </script>
 </body>
 </html>
-```
