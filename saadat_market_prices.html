@@ -34,20 +34,24 @@ body {
 .grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
+  gap: 12px;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  justify-items: center;
 }
 
 .card {
   position: relative;
   width: 100%;
-  aspect-ratio: 1092 / 234;
   min-width: 0;
+  aspect-ratio: 1092 / 234;
   overflow: hidden;
 
   background-image: url("https://raw.githubusercontent.com/sampixel1-ctrl/saadat-news/main/price-cards.png");
   background-repeat: no-repeat;
   background-position: center;
-  background-size:  100% 100%;
+  background-size: 110% 110%;
 }
 
 .info {
