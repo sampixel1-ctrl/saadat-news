@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#101b2b">
-  <title>قیمت‌های بازار | بازرگانی سعادت</title>
+  <meta name="theme-color" content="#ffffff">
+  <title>قیمت ارز، طلا و سکه | بازرگانی سعادت</title>
 
   <style>
     * {
@@ -14,190 +14,132 @@
 
     html, body {
       margin: 0;
+      padding: 0;
       width: 100%;
       min-height: 100%;
       overflow-x: hidden;
     }
 
     body {
-      padding: 8px;
-      background: #101b2b;
-      color: #f5f7ff;
+      background: #ffffff;
       font-family: Tahoma, Arial, sans-serif;
-      -webkit-text-size-adjust: 100%;
+      padding: 12px 8px;
     }
 
     .container {
       width: 100%;
-      max-width: 600px;
+      max-width: 720px;
       margin: 0 auto;
     }
 
-    .status-bar {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 7px;
-      flex-wrap: wrap;
-      margin: 4px 0 12px;
-      padding: 8px;
-      background: #10263a;
-      border: 1px solid #244664;
-      border-radius: 9px;
-      color: #b9d9f5;
+    .status {
+      text-align: center;
+      color: #777777;
       font-size: 11px;
-      line-height: 1.8;
-    }
-
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      flex: 0 0 8px;
-      border-radius: 50%;
-      background: #ffb547;
-    }
-
-    .status-dot.online {
-      background: #20d99a;
-    }
-
-    .status-dot.error {
-      background: #ff555d;
-    }
-
-    .section-title {
-      margin: 10px 3px;
-      font-size: 14px;
-      font-weight: bold;
-      color: #ffbd66;
+      margin: 0 0 10px;
+      min-height: 17px;
     }
 
     .grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 8px;
+      gap: 14px 20px;
       width: 100%;
     }
 
     .card {
+      width: 100%;
       min-width: 0;
-      padding: 12px 5px;
-      text-align: center;
-      background: linear-gradient(145deg, #142b40, #071321);
-      border: 1px solid #244664;
-      border-radius: 11px;
+      height: 102px;
+      padding: 10px 14px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 10px;
+      background: #f41443;
+      border-radius: 29px;
+      color: #ffffff;
+      overflow: hidden;
     }
 
-    .icon {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 34px;
-      height: 34px;
-      margin: 0 auto 7px;
-      border-radius: 9px;
-      background: #21374a;
-      color: #ffb547;
-      font-size: 21px;
+    .logo {
+      width: 47px;
+      height: 47px;
+      flex: 0 0 47px;
+      border-radius: 50%;
+      background: #073cff;
+    }
+
+    .info {
+      flex: 1;
+      min-width: 0;
+      text-align: center;
     }
 
     .name {
-      min-height: 38px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: #c3ddf5;
-      font-size: 12px;
+      font-size: clamp(13px, 2.9vw, 21px);
       font-weight: bold;
-      line-height: 1.7;
-      overflow-wrap: anywhere;
+      line-height: 1.5;
+      white-space: nowrap;
     }
 
     .price {
-      margin: 9px 0 4px;
-      font-size: clamp(15px, 4vw, 20px);
+      margin-top: 2px;
+      font-size: clamp(15px, 3.5vw, 24px);
       font-weight: bold;
-      line-height: 1.6;
-      direction: ltr;
-      overflow-wrap: anywhere;
-      word-break: break-word;
-      transition: color 0.25s ease;
+      line-height: 1.5;
+      white-space: nowrap;
+      direction: rtl;
     }
 
-    .unit {
-      margin-top: 4px;
-      color: #8fa9c1;
-      font-size: 10px;
-    }
-
-    .same {
-      color: #ffffff;
+    .price.loading {
+      font-size: 15px;
     }
 
     .up {
-      color: #20d99a;
+      color: #caffdc;
     }
 
     .down {
-      color: #ff626b;
+      color: #ffe0e0;
     }
 
     .footer {
-      margin: 14px 0 8px;
-      padding: 10px 5px;
       text-align: center;
-      border-top: 1px solid #244664;
-      color: #8fa9c1;
+      color: #888888;
       font-size: 10px;
-      line-height: 2;
+      margin-top: 14px;
+      line-height: 1.8;
     }
 
-    @media (max-width: 340px) {
+    @media (max-width: 380px) {
       body {
-        padding: 5px;
+        padding: 10px 6px;
       }
 
       .grid {
-        gap: 6px;
+        gap: 10px 8px;
       }
 
       .card {
-        padding: 10px 3px;
+        height: 90px;
+        padding: 8px 8px;
+        gap: 6px;
+        border-radius: 23px;
+      }
+
+      .logo {
+        width: 35px;
+        height: 35px;
+        flex-basis: 35px;
       }
 
       .name {
-        font-size: 11px;
+        font-size: 12px;
       }
 
       .price {
         font-size: 14px;
-      }
-    }
-
-    @media (min-width: 700px) {
-      body {
-        padding: 14px;
-      }
-
-      .container {
-        max-width: 750px;
-      }
-
-      .grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 12px;
-      }
-
-      .card {
-        padding: 18px 8px;
-      }
-
-      .name {
-        font-size: 13px;
-      }
-
-      .price {
-        font-size: 21px;
       }
     }
   </style>
@@ -205,113 +147,79 @@
 
 <body>
   <main class="container">
-
-    <div class="status-bar">
-      <span id="statusDot" class="status-dot"></span>
-      <span id="status">در حال دریافت قیمت‌ها...</span>
-    </div>
-
-    <div class="section-title">قیمت‌های لحظه‌ای</div>
-
-    <section class="grid" id="prices"></section>
-
-    <footer class="footer">
-      قیمت‌ها به تومان هستند.<br>
-      منبع: TGJU · بررسی خودکار هر ۶۰ ثانیه
-    </footer>
-
+    <div id="status" class="status">در حال دریافت قیمت‌ها...</div>
+    <section id="prices" class="grid"></section>
+    <div class="footer">قیمت‌ها به تومان · منبع: TGJU</div>
   </main>
 
   <script>
     const items = [
-      { id: "price_dollar_rl", name: "دلار آمریکا", icon: "$" },
-      { id: "price_eur", name: "یورو", icon: "€" },
-      { id: "sekeb", name: "سکه بهار آزادی (قدیم)", icon: "◉" },
-      { id: "sekee", name: "سکه امامی (جدید)", icon: "◎" },
-      { id: "geram18", name: "طلای ۱۸ عیار", icon: "◆" },
-      { id: "geram24", name: "طلای ۲۴ عیار", icon: "✦" }
+      { id: "price_dollar_rl", name: "دلار" },
+      { id: "price_eur", name: "یورو" },
+      { id: "sekeb", name: "سکه تمام قدیم" },
+      { id: "sekee", name: "سکه تمام جدید" },
+      { id: "geram18", name: "طلا ۱۸ عیار" },
+      { id: "geram24", name: "طلا ۲۴ عیار" }
     ];
 
     const previousPrices = {};
     let updating = false;
 
     function formatPrice(value) {
-      return (value / 10).toLocaleString("en-US", {
-        maximumFractionDigits: 2
-      });
+      return Math.round(value / 10).toLocaleString("en-US")
+        + " تومان";
     }
 
     function createCards() {
       document.getElementById("prices").innerHTML =
         items.map(item => `
           <article class="card" id="card-${item.id}">
-            <div class="icon">${item.icon}</div>
-            <div class="name">${item.name}</div>
-            <div class="price same">---</div>
-            <div class="unit">تومان</div>
+            <div class="logo" aria-hidden="true"></div>
+            <div class="info">
+              <div class="name">${item.name}</div>
+              <div class="price loading">در حال دریافت...</div>
+            </div>
           </article>
         `).join("");
     }
 
     function updateCard(item, data) {
       const value = Number(data.p);
-
-      if (!Number.isFinite(value) || value <= 0) {
-        return false;
-      }
+      if (!Number.isFinite(value) || value <= 0) return false;
 
       const element = document.querySelector(
         "#card-" + item.id + " .price"
       );
-
-      if (!element) {
-        return false;
-      }
+      if (!element) return false;
 
       const oldValue = previousPrices[item.id];
+      element.className = "price";
 
       if (oldValue !== undefined) {
-        if (value > oldValue) {
-          element.className = "price up";
-        } else if (value < oldValue) {
-          element.className = "price down";
-        }
-      } else {
-        element.className = "price same";
+        if (value > oldValue) element.classList.add("up");
+        else if (value < oldValue) element.classList.add("down");
       }
 
       element.textContent = formatPrice(value);
       previousPrices[item.id] = value;
-
       return true;
     }
 
     async function updatePrices() {
       if (updating) return;
-
       updating = true;
 
       const status = document.getElementById("status");
-      const dot = document.getElementById("statusDot");
-
-      status.textContent = "در حال بررسی قیمت‌ها...";
-      dot.className = "status-dot";
+      status.textContent = "در حال به‌روزرسانی قیمت‌ها...";
 
       try {
         const keys = items.map(item => item.id).join(",");
-
         const url =
           "https://api.tgju.org/v1/widget/tmp?keys=" +
-          encodeURIComponent(keys) +
-          "&_=" + Date.now();
+          encodeURIComponent(keys) + "&_=" + Date.now();
 
-        const response = await fetch(url, {
-          cache: "no-store"
-        });
-
-        if (!response.ok) {
-          throw new Error("HTTP " + response.status);
-        }
+        const response = await fetch(url, { cache: "no-store" });
+        if (!response.ok) throw new Error("HTTP " + response.status);
 
         const result = await response.json();
         const indicators = result?.response?.indicators;
@@ -320,38 +228,27 @@
           throw new Error("Invalid response");
         }
 
-        const dataByName = {};
-
+        const byName = {};
         indicators.forEach(entry => {
-          dataByName[entry.name] = entry;
+          byName[entry.name] = entry;
         });
 
         let received = 0;
 
         items.forEach(item => {
-          const data = dataByName[item.id];
-
-          if (data && updateCard(item, data)) {
+          if (byName[item.id] && updateCard(item, byName[item.id])) {
             received++;
           }
         });
 
         const time = new Date().toLocaleTimeString("fa-IR");
-
-        if (received === items.length) {
-          status.textContent = "آخرین بررسی: " + time;
-          dot.className = "status-dot online";
-        } else {
-          status.textContent =
-            received + " از ۶ قیمت دریافت شد · " + time;
-          dot.className = "status-dot error";
-        }
+        status.textContent = received === 6
+          ? "آخرین به‌روزرسانی: " + time
+          : "دریافت " + received + " از ۶ قیمت · " + time;
 
       } catch (error) {
-        status.textContent = "خطا در دریافت قیمت‌ها؛ اتصال را بررسی کنید.";
-        dot.className = "status-dot error";
-        console.error("TGJU update error:", error);
-
+        status.textContent = "دریافت قیمت ناموفق بود";
+        console.error("TGJU:", error);
       } finally {
         updating = false;
       }
