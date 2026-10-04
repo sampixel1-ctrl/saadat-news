@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>قیمت بازار - بازرگانی سعادت</title>
+<style>
+body{margin:0;padding:16px;background:#f5f7fa;font-family:Tahoma,Arial,sans-serif;color:#222}
+h1{text-align:center;font-size:23px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;max-width:700px;margin:auto}
+.card{background:#fff;border-radius:14px;padding:16px;box-shadow:0 3px 12px #0001;text-align:center}
+.name{font-size:16px;font-weight:bold;margin-bottom:10px}
+.price{font-size:21px;font-weight:bold;direction:ltr}
+.unit{font-size:12px;color:#777;margin-top:7px}
+.note{text-align:center;font-size:12px;color:#777;margin-top:18px}
+@media(max-width:480px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<h1>قیمت بازار | بازرگانی سعادت</h1>
+<div class="grid">
+<div class="card"><div class="name">دلار</div><div class="price" id="price_dollar_rl">—</div><div class="unit">ریال</div></div>
+<div class="card"><div class="name">یورو</div><div class="price" id="price_eur">—</div><div class="unit">ریال</div></div>
+<div class="card"><div class="name">سکه طرح قدیم</div><div class="price" id="sekeb">—</div><div class="unit">ریال</div></div>
+<div class="card"><div class="name">سکه طرح جدید</div><div class="price" id="sekee">—</div><div class="unit">ریال</div></div>
+<div class="card"><div class="name">طلای ۱۸ عیار</div><div class="price" id="geram18">—</div><div class="unit">ریال / گرم</div></div>
+<div class="card"><div class="name">طلای ۲۴ عیار</div><div class="price" id="geram24">—</div><div class="unit">ریال / گرم</div></div>
+</div>
+<div class="note">قیمت‌ها هنوز به منبع زنده متصل نشده‌اند؛ این صفحه قالب نمایشی است.</div>
+</body>
+</html>
