@@ -1,262 +1,321 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#ffffff">
-  <title>قیمت ارز، طلا و سکه | بازرگانی سعادت</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>قیمت روز بازار | بازرگانی سعادت</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      -webkit-tap-highlight-color: transparent;
-    }
+<style>
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
 
-    html, body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      min-height: 100%;
-      overflow-x: hidden;
-    }
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
+}
 
-    body {
-      background: #ffffff;
-      font-family: Tahoma, Arial, sans-serif;
-      padding: 12px 8px;
-    }
+body {
+  background: #fff;
+  font-family: Tahoma, Arial, sans-serif;
+  padding: 10px;
+}
 
-    .container {
-      width: 100%;
-      max-width: 720px;
-      margin: 0 auto;
-    }
+.container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
 
-    .status {
-      text-align: center;
-      color: #777777;
-      font-size: 11px;
-      margin: 0 0 10px;
-      min-height: 17px;
-    }
+.status {
+  min-height: 24px;
+  margin-bottom: 10px;
+  text-align: center;
+  font-size: 11px;
+  color: #666;
+  line-height: 1.8;
+}
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px 20px;
-      width: 100%;
-    }
+.status-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-left: 5px;
+  border-radius: 50%;
+  background: #f5a623;
+}
 
-    .card {
-      width: 100%;
-      min-width: 0;
-      height: 102px;
-      padding: 10px 14px;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      gap: 10px;
-      background: #f41443;
-      border-radius: 29px;
-      color: #ffffff;
-      overflow: hidden;
-    }
+.status-dot.online {
+  background: #16bf78;
+}
 
-    .logo {
-      width: 47px;
-      height: 47px;
-      flex: 0 0 47px;
-      border-radius: 50%;
-      background: #073cff;
-    }
+.status-dot.error {
+  background: #ed2347;
+}
 
-    .info {
-      flex: 1;
-      min-width: 0;
-      text-align: center;
-    }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  width: 100%;
+}
 
-    .name {
-      font-size: clamp(13px, 2.9vw, 21px);
-      font-weight: bold;
-      line-height: 1.5;
-      white-space: nowrap;
-    }
+/* نسبت تصویر در تمام اندازه‌ها حفظ می‌شود */
+.card {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  aspect-ratio: 1092 / 234;
+  overflow: hidden;
 
-    .price {
-      margin-top: 2px;
-      font-size: clamp(15px, 3.5vw, 24px);
-      font-weight: bold;
-      line-height: 1.5;
-      white-space: nowrap;
-      direction: rtl;
-    }
+  background-image: url(
+    "https://raw.githubusercontent.com/sampixel1-ctrl/saadat-news/main/price-cards.png"
+  );
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+}
 
-    .price.loading {
-      font-size: 15px;
-    }
+/* لوگو در قسمت صورتی سمت راست */
+.logo {
+  position: absolute;
+  right: 5%;
+  top: 50%;
+  transform: translateY(-50%);
 
-    .up {
-      color: #caffdc;
-    }
+  width: 17%;
+  aspect-ratio: 1;
+  border-radius: 50%;
 
-    .down {
-      color: #ffe0e0;
-    }
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    .footer {
-      text-align: center;
-      color: #888888;
-      font-size: 10px;
-      margin-top: 14px;
-      line-height: 1.8;
-    }
+  background: #0645ed;
+  color: #fff;
+  border: 2px solid #fff;
 
-    @media (max-width: 380px) {
-      body {
-        padding: 10px 6px;
-      }
+  font-family: Arial, Tahoma, sans-serif;
+  font-weight: bold;
+  font-size: clamp(12px, 3vw, 26px);
+}
 
-      .grid {
-        gap: 10px 8px;
-      }
+/* متن در بخش سفید کادر */
+.info {
+  position: absolute;
+  right: 23%;
+  left: 24%;
+  top: 50%;
+  transform: translateY(-50%);
+  min-width: 0;
+  text-align: center;
+  color: #171717;
+}
 
-      .card {
-        height: 90px;
-        padding: 8px 8px;
-        gap: 6px;
-        border-radius: 23px;
-      }
+.name {
+  font-weight: bold;
+  font-size: clamp(10px, 2.2vw, 19px);
+  line-height: 1.5;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
-      .logo {
-        width: 35px;
-        height: 35px;
-        flex-basis: 35px;
-      }
+.price {
+  margin-top: 2px;
+  font-weight: bold;
+  font-size: clamp(10px, 2.5vw, 22px);
+  line-height: 1.5;
+  white-space: nowrap;
+  direction: rtl;
+}
 
-      .name {
-        font-size: 12px;
-      }
+.price.up {
+  color: #07884c;
+}
 
-      .price {
-        font-size: 14px;
-      }
-    }
-  </style>
+.price.down {
+  color: #df163b;
+}
+
+.price.same {
+  color: #171717;
+}
+
+.footer {
+  margin-top: 12px;
+  text-align: center;
+  color: #777;
+  font-size: 10px;
+  line-height: 1.8;
+}
+
+/* گوشی‌های کوچک */
+@media (max-width: 380px) {
+  body {
+    padding: 7px;
+  }
+
+  .grid {
+    gap: 8px;
+  }
+
+  .name {
+    font-size: 10px;
+  }
+
+  .price {
+    font-size: 10px;
+  }
+
+  .logo {
+    border-width: 1px;
+  }
+}
+
+/* نمایشگرهای بزرگ */
+@media (min-width: 700px) {
+  .grid {
+    gap: 16px;
+  }
+}
+</style>
 </head>
 
 <body>
-  <main class="container">
-    <div id="status" class="status">در حال دریافت قیمت‌ها...</div>
-    <section id="prices" class="grid"></section>
-    <div class="footer">قیمت‌ها به تومان · منبع: TGJU</div>
-  </main>
+<main class="container">
 
-  <script>
-    const items = [
-      { id: "price_dollar_rl", name: "دلار" },
-      { id: "price_eur", name: "یورو" },
-      { id: "sekeb", name: "سکه تمام قدیم" },
-      { id: "sekee", name: "سکه تمام جدید" },
-      { id: "geram18", name: "طلا ۱۸ عیار" },
-      { id: "geram24", name: "طلا ۲۴ عیار" }
-    ];
+  <div class="status">
+    <span id="statusDot" class="status-dot"></span>
+    <span id="status">در حال دریافت قیمت‌ها...</span>
+  </div>
 
-    const previousPrices = {};
-    let updating = false;
+  <section class="grid" id="prices"></section>
 
-    function formatPrice(value) {
-      return Math.round(value / 10).toLocaleString("en-US")
-        + " تومان";
+  <div class="footer">
+    قیمت‌ها به تومان · منبع: TGJU
+  </div>
+
+</main>
+
+<script>
+const items = [
+  { id: "price_dollar_rl", name: "دلار", logo: "$" },
+  { id: "price_eur", name: "یورو", logo: "€" },
+  { id: "sekeb", name: "سکه تمام قدیم", logo: "س" },
+  { id: "sekee", name: "سکه تمام جدید", logo: "س" },
+  { id: "geram24", name: "طلا ۲۴ عیار", logo: "Au" },
+  { id: "geram18", name: "طلا ۱۸ عیار", logo: "Au" }
+];
+
+const previousPrices = {};
+let updating = false;
+
+function formatPrice(value) {
+  return Math.round(value / 10).toLocaleString("en-US") + " تومان";
+}
+
+function createCards() {
+  document.getElementById("prices").innerHTML =
+    items.map(item => `
+      <article class="card" id="card-${item.id}">
+        <div class="logo">${item.logo}</div>
+        <div class="info">
+          <div class="name">${item.name}</div>
+          <div class="price same">---</div>
+        </div>
+      </article>
+    `).join("");
+}
+
+function updateCard(item, data) {
+  const value = Number(data.p);
+  if (!Number.isFinite(value) || value <= 0) return false;
+
+  const element = document.querySelector(
+    "#card-" + item.id + " .price"
+  );
+
+  if (!element) return false;
+
+  const oldValue = previousPrices[item.id];
+  element.className = "price same";
+
+  if (oldValue !== undefined) {
+    if (value > oldValue) element.className = "price up";
+    if (value < oldValue) element.className = "price down";
+  }
+
+  element.textContent = formatPrice(value);
+  previousPrices[item.id] = value;
+  return true;
+}
+
+async function updatePrices() {
+  if (updating) return;
+  updating = true;
+
+  const status = document.getElementById("status");
+  const dot = document.getElementById("statusDot");
+
+  try {
+    status.textContent = "در حال به‌روزرسانی...";
+    dot.className = "status-dot";
+
+    const keys = items.map(item => item.id).join(",");
+    const url =
+      "https://api.tgju.org/v1/widget/tmp?keys=" +
+      encodeURIComponent(keys) + "&_=" + Date.now();
+
+    const response = await fetch(url, { cache: "no-store" });
+
+    if (!response.ok) throw new Error("HTTP " + response.status);
+
+    const result = await response.json();
+    const indicators = result?.response?.indicators;
+
+    if (!Array.isArray(indicators)) {
+      throw new Error("Invalid response");
     }
 
-    function createCards() {
-      document.getElementById("prices").innerHTML =
-        items.map(item => `
-          <article class="card" id="card-${item.id}">
-            <div class="logo" aria-hidden="true"></div>
-            <div class="info">
-              <div class="name">${item.name}</div>
-              <div class="price loading">در حال دریافت...</div>
-            </div>
-          </article>
-        `).join("");
-    }
+    const byName = {};
+    indicators.forEach(entry => {
+      byName[entry.name] = entry;
+    });
 
-    function updateCard(item, data) {
-      const value = Number(data.p);
-      if (!Number.isFinite(value) || value <= 0) return false;
+    let received = 0;
 
-      const element = document.querySelector(
-        "#card-" + item.id + " .price"
-      );
-      if (!element) return false;
-
-      const oldValue = previousPrices[item.id];
-      element.className = "price";
-
-      if (oldValue !== undefined) {
-        if (value > oldValue) element.classList.add("up");
-        else if (value < oldValue) element.classList.add("down");
+    items.forEach(item => {
+      if (byName[item.id] && updateCard(item, byName[item.id])) {
+        received++;
       }
+    });
 
-      element.textContent = formatPrice(value);
-      previousPrices[item.id] = value;
-      return true;
-    }
+    status.textContent = received === 6
+      ? "آنلاین · آخرین بررسی " + new Date().toLocaleTimeString("fa-IR")
+      : "دریافت " + received + " از ۶ قیمت";
 
-    async function updatePrices() {
-      if (updating) return;
-      updating = true;
+    dot.className = received === 6
+      ? "status-dot online"
+      : "status-dot error";
 
-      const status = document.getElementById("status");
-      status.textContent = "در حال به‌روزرسانی قیمت‌ها...";
+  } catch (error) {
+    status.textContent = "خطا در دریافت قیمت‌ها";
+    dot.className = "status-dot error";
+    console.error(error);
+  } finally {
+    updating = false;
+  }
+}
 
-      try {
-        const keys = items.map(item => item.id).join(",");
-        const url =
-          "https://api.tgju.org/v1/widget/tmp?keys=" +
-          encodeURIComponent(keys) + "&_=" + Date.now();
-
-        const response = await fetch(url, { cache: "no-store" });
-        if (!response.ok) throw new Error("HTTP " + response.status);
-
-        const result = await response.json();
-        const indicators = result?.response?.indicators;
-
-        if (!Array.isArray(indicators)) {
-          throw new Error("Invalid response");
-        }
-
-        const byName = {};
-        indicators.forEach(entry => {
-          byName[entry.name] = entry;
-        });
-
-        let received = 0;
-
-        items.forEach(item => {
-          if (byName[item.id] && updateCard(item, byName[item.id])) {
-            received++;
-          }
-        });
-
-        const time = new Date().toLocaleTimeString("fa-IR");
-        status.textContent = received === 6
-          ? "آخرین به‌روزرسانی: " + time
-          : "دریافت " + received + " از ۶ قیمت · " + time;
-
-      } catch (error) {
-        status.textContent = "دریافت قیمت ناموفق بود";
-        console.error("TGJU:", error);
-      } finally {
-        updating = false;
-      }
-    }
-
-    createCards();
-    updatePrices();
-    setInterval(updatePrices, 60000);
-  </script>
+createCards();
+updatePrices();
+setInterval(updatePrices, 60000);
+</script>
 </body>
 </html>
