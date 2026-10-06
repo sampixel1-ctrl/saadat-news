@@ -18,19 +18,6 @@ body {
   direction: rtl;
 }
 
-.header {
-  text-align: center;
-  font-size: 16px;
-  font-weight: bold;
-  margin: 8px 0 16px;
-  color: #222;
-}
-
-#countdown {
-  color: #e32670;
-  font-size: 19px;
-}
-
 .grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -121,14 +108,9 @@ body {
 
 <body>
 
-<div class="header">
-  بروزرسانی تا
-  <span id="countdown">60</span>
-  ثانیه دیگر
-</div>
-
 <div class="grid">
 
+  <!-- دلار -->
   <div class="card">
     <div class="info">
       <div class="name">دلار آمریکا</div>
@@ -136,6 +118,7 @@ body {
     </div>
   </div>
 
+  <!-- یورو -->
   <div class="card">
     <div class="info">
       <div class="name">یورو</div>
@@ -143,31 +126,19 @@ body {
     </div>
   </div>
 
+  <!-- سکه تمام طرح جدید -->
   <div class="card">
     <div class="info">
-      <div class="name">سکه امامی</div>
+      <div class="name">سکه تمام طرح جدید</div>
       <div class="price" id="coin">در حال دریافت...</div>
     </div>
   </div>
 
-  <div class="card">
-    <div class="info">
-      <div class="name">سکه بهار آزادی</div>
-      <div class="price" id="oldcoin">در حال دریافت...</div>
-    </div>
-  </div>
-
+  <!-- طلای ۱۸ عیار -->
   <div class="card">
     <div class="info">
       <div class="name">طلای ۱۸ عیار</div>
       <div class="price" id="gold18">در حال دریافت...</div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="info">
-      <div class="name">طلای ۲۴ عیار</div>
-      <div class="price" id="gold24">در حال دریافت...</div>
     </div>
   </div>
 
@@ -178,16 +149,15 @@ body {
 </div>
 
 <script>
+
 const API =
-  "https://api.tgju.org/v1/widget/tmp?keys=price_dollar_rl,price_eur,sekeb,sekee,geram18,geram24";
+  "https://api.tgju.org/v1/widget/tmp?keys=price_dollar_rl,price_eur,sekee,geram18";
 
 const items = {
   price_dollar_rl: "usd",
   price_eur: "eur",
-  sekeb: "coin",
-  sekee: "oldcoin",
-  geram18: "gold18",
-  geram24: "gold24"
+  sekee: "coin",
+  geram18: "gold18"
 };
 
 const previousPrices = {};
@@ -197,9 +167,11 @@ function formatPrice(value) {
 }
 
 async function updatePrices() {
+
   const status = document.getElementById("status");
 
   try {
+
     const response = await fetch(API, {
       cache: "no-store"
     });
@@ -212,6 +184,7 @@ async function updatePrices() {
     const indicators = data.response.indicators;
 
     for (const item of indicators) {
+
       const elementId = items[item.name];
 
       if (!elementId || item.p == null) continue;
@@ -224,14 +197,19 @@ async function updatePrices() {
 
       // تبدیل ریال به تومان
       const price = rawPrice / 10;
+
       const element = document.getElementById(elementId);
 
       element.textContent = formatPrice(price);
+
       element.classList.remove("up", "down");
 
+      // تشخیص افزایش یا کاهش قیمت
       if (previousPrices[item.name] !== undefined) {
+
         if (price > previousPrices[item.name]) {
           element.classList.add("up");
+
         } else if (price < previousPrices[item.name]) {
           element.classList.add("down");
         }
@@ -241,47 +219,26 @@ async function updatePrices() {
     }
 
     status.textContent =
-      "آخرین بررسی: " +
+      "آخرین بروزرسانی: " +
       new Date().toLocaleTimeString("fa-IR");
 
   } catch (error) {
+
     status.textContent =
       "دریافت قیمت ناموفق بود؛ اتصال اینترنت را بررسی کنید.";
   }
 }
 
-// شمارش معکوس و به‌روزرسانی خودکار
-let seconds = 60;
-let updating = false;
 
-const countdownElement = document.getElementById("countdown");
-
-async function refreshCycle() {
-  if (updating) return;
-
-  updating = true;
-  seconds = 60;
-  countdownElement.textContent = seconds;
-
-  try {
-    await updatePrices();
-  } finally {
-    updating = false;
-  }
-}
-
+// دریافت اولیه قیمت‌ها
 updatePrices();
 
-setInterval(() => {
-  if (seconds > 0) {
-    seconds--;
-    countdownElement.textContent = seconds;
-  }
 
-  if (seconds === 0 && !updating) {
-    refreshCycle();
-  }
-}, 1000);
+// بروزرسانی خودکار هر 60 ثانیه
+setInterval(() => {
+  updatePrices();
+}, 60000);
+
 </script>
 
 </body>
