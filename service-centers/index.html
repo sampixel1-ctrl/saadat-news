@@ -5,50 +5,159 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>نمایندگان خدمات</title>
 <style>
-body{margin:0;background:#f5f7fb;font-family:tahoma;color:#172033}
-.wrap{padding:15px}
-.provinces{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.province{background:white;border:0;border-radius:15px;padding:18px;font-weight:bold}
-.active{background:#172033;color:white}
-.card{background:white;border-radius:18px;padding:15px;margin-top:12px}
-.brand{display:inline-block;background:#eef2f7;border-radius:20px;padding:6px 10px;margin:3px;font-size:12px}
-.name{font-size:17px;font-weight:bold}
-.info{line-height:2;margin-top:10px}
-.call{display:block;background:#172033;color:white;text-align:center;padding:12px;border-radius:12px;text-decoration:none;margin-top:12px}
+body{
+margin:0;
+background:#f4f4f8;
+font-family:tahoma;
+color:#222;
+}
+.header{
+background:#c90055;
+color:white;
+padding:22px;
+font-size:22px;
+text-align:center;
+border-radius:0 0 25px 25px;
+}
+.wrap{padding:18px}
+.title{
+text-align:center;
+font-size:22px;
+font-weight:bold;
+margin:15px 0;
+}
+.line{
+height:2px;
+background:#c90055;
+width:80px;
+margin:8px auto 20px;
+}
+.provinces{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px;
+}
+.province{
+background:white;
+border:0;
+border-radius:18px;
+padding:18px 8px;
+font-size:16px;
+font-weight:bold;
+box-shadow:0 5px 15px #0002;
+}
+.active{
+background:#c90055;
+color:white;
+}
+.card{
+background:white;
+border-radius:22px;
+padding:18px;
+margin-top:16px;
+box-shadow:0 8px 20px #0002;
+}
+.name{
+font-size:20px;
+font-weight:bold;
+margin-bottom:15px;
+}
+.brand{
+display:inline-block;
+background:#f8d5e4;
+color:#c90055;
+border-radius:20px;
+padding:7px 12px;
+margin:4px;
+font-size:13px;
+}
+.info{
+margin-top:15px;
+line-height:2;
+font-size:14px;
+}
+.call{
+display:block;
+background:#c90055;
+color:white;
+text-align:center;
+padding:13px;
+border-radius:15px;
+margin-top:15px;
+text-decoration:none;
+font-weight:bold;
+}
 </style>
 </head>
 <body>
+
+<div class="header">بازرگانی سعادت</div>
+
 <div class="wrap">
+
+<div class="title">نمایندگان خدمات</div>
+<div class="line"></div>
+
 <div id="provinces" class="provinces"></div>
-<div id="results"></div>
+<div id="result"></div>
+
 </div>
+
 <script>
-let data={provinces:[]},selected="";
-fetch("service_centers.json?v="+Date.now()).then(r=>r.json()).then(j=>{data=j;showProvinces()});
+let data;
+let selected="";
+
+fetch("service_centers.json?v="+Date.now())
+.then(r=>r.json())
+.then(j=>{
+data=j;
+showProvinces();
+});
 
 function showProvinces(){
- let b=document.getElementById("provinces");
- b.innerHTML="";
- data.provinces.forEach(p=>{
-  let x=document.createElement("button");
-  x.className="province "+(selected==p.name?"active":"");
-  x.innerText=p.name;
-  x.onclick=()=>{selected=p.name;showProvinces();showReps()};
-  b.appendChild(x);
- });
+let box=document.getElementById("provinces");
+box.innerHTML="";
+data.provinces.forEach(p=>{
+let b=document.createElement("button");
+b.className="province "+(selected==p.name?"active":"");
+b.innerHTML=p.name;
+b.onclick=()=>{
+selected=p.name;
+showProvinces();
+showRepresentatives();
+};
+box.appendChild(b);
+});
 }
-function showReps(){
- let p=data.provinces.find(x=>x.name==selected);
- document.getElementById("results").innerHTML=(p.representatives.length?
- p.representatives.map(r=>`
- <div class="card">
- <div class="name">${r.name}</div>
- <div>${(r.brands||[]).map(x=>`<span class="brand">${x}</span>`).join("")}</div>
- <div class="info">📞 ${r.phone}<br>📍 ${r.address}</div>
- <a class="call" href="tel:${r.phone}">تماس</a>
- </div>`).join(""):
- '<div class="card">نماینده‌ای ثبت نشده است</div>');
+
+function showRepresentatives(){
+let p=data.provinces.find(x=>x.name==selected);
+let box=document.getElementById("result");
+
+if(!p.representatives.length){
+box.innerHTML='<div class="card">نماینده‌ای ثبت نشده است</div>';
+return;
+}
+
+box.innerHTML=p.representatives.map(r=>`
+<div class="card">
+<div class="name">${r.name}</div>
+
+${r.brands.map(b=>`<span class="brand">${b}</span>`).join("")}
+
+<div class="info">
+📞 ${r.phone}<br>
+📍 ${r.address}
+</div>
+
+<a class="call" href="tel:${r.phone}">
+تماس با نماینده
+</a>
+
+</div>
+`).join("");
 }
 </script>
+
 </body>
 </html>
