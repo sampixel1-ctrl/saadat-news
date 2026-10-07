@@ -75,14 +75,8 @@ body {
   color: #e32636;
 }
 
-.status {
-  text-align: center;
-  color: #777;
-  font-size: 10px;
-  margin-top: 14px;
-}
-
 @media (max-width: 350px) {
+
   body {
     padding: 7px;
   }
@@ -104,6 +98,7 @@ body {
   }
 }
 </style>
+
 </head>
 
 <body>
@@ -118,6 +113,7 @@ body {
     </div>
   </div>
 
+
   <!-- یورو -->
   <div class="card">
     <div class="info">
@@ -126,7 +122,8 @@ body {
     </div>
   </div>
 
-  <!-- سکه تمام طرح جدید -->
+
+  <!-- سکه -->
   <div class="card">
     <div class="info">
       <div class="name">سکه تمام طرح جدید</div>
@@ -134,7 +131,8 @@ body {
     </div>
   </div>
 
-  <!-- طلای ۱۸ عیار -->
+
+  <!-- طلا -->
   <div class="card">
     <div class="info">
       <div class="name">طلای ۱۸ عیار</div>
@@ -142,104 +140,172 @@ body {
     </div>
   </div>
 
+
 </div>
 
-<div class="status" id="status">
-  در حال اتصال به سرور قیمت‌ها...
-</div>
 
 <script>
 
 const API =
-  "https://api.tgju.org/v1/widget/tmp?keys=price_dollar_rl,price_eur,sekee,geram18";
+"https://api.tgju.org/v1/widget/tmp?keys=price_dollar_rl,price_eur,sekee,geram18";
+
 
 const items = {
+
   price_dollar_rl: "usd",
   price_eur: "eur",
   sekee: "coin",
   geram18: "gold18"
+
 };
+
 
 const previousPrices = {};
 
+
 function formatPrice(value) {
-  return Math.round(value).toLocaleString("en-US") + " تومان";
+
+  return Math.round(value)
+  .toLocaleString("en-US") + " تومان";
+
 }
+
+
 
 async function updatePrices() {
 
-  const status = document.getElementById("status");
+try {
 
-  try {
 
-    const response = await fetch(API, {
-      cache: "no-store"
-    });
+const response = await fetch(API,{
+cache:"no-store"
+});
 
-    if (!response.ok) {
-      throw new Error("خطا در دریافت اطلاعات");
-    }
 
-    const data = await response.json();
-    const indicators = data.response.indicators;
+if(!response.ok){
 
-    for (const item of indicators) {
+throw new Error("خطا در دریافت اطلاعات");
 
-      const elementId = items[item.name];
-
-      if (!elementId || item.p == null) continue;
-
-      const rawPrice = Number(
-        String(item.p).replace(/,/g, "")
-      );
-
-      if (!Number.isFinite(rawPrice)) continue;
-
-      // تبدیل ریال به تومان
-      const price = rawPrice / 10;
-
-      const element = document.getElementById(elementId);
-
-      element.textContent = formatPrice(price);
-
-      element.classList.remove("up", "down");
-
-      // تشخیص افزایش یا کاهش قیمت
-      if (previousPrices[item.name] !== undefined) {
-
-        if (price > previousPrices[item.name]) {
-          element.classList.add("up");
-
-        } else if (price < previousPrices[item.name]) {
-          element.classList.add("down");
-        }
-      }
-
-      previousPrices[item.name] = price;
-    }
-
-    status.textContent =
-      "آخرین بروزرسانی: " +
-      new Date().toLocaleTimeString("fa-IR");
-
-  } catch (error) {
-
-    status.textContent =
-      "دریافت قیمت ناموفق بود؛ اتصال اینترنت را بررسی کنید.";
-  }
 }
 
 
-// دریافت اولیه قیمت‌ها
+
+const data = await response.json();
+
+const indicators = data.response.indicators;
+
+
+
+for(const item of indicators){
+
+
+const elementId = items[item.name];
+
+
+if(!elementId || item.p == null)
+continue;
+
+
+
+const rawPrice = Number(
+String(item.p).replace(/,/g,"")
+);
+
+
+
+if(!Number.isFinite(rawPrice))
+continue;
+
+
+
+// تبدیل ریال به تومان
+
+const price = rawPrice / 10;
+
+
+
+const element =
+document.getElementById(elementId);
+
+
+
+element.textContent =
+formatPrice(price);
+
+
+
+element.classList.remove(
+"up",
+"down"
+);
+
+
+
+// تشخیص تغییر قیمت
+
+if(previousPrices[item.name] !== undefined){
+
+
+if(price > previousPrices[item.name]){
+
+element.classList.add("up");
+
+
+}
+
+else if(price < previousPrices[item.name]){
+
+element.classList.add("down");
+
+
+}
+
+
+}
+
+
+
+previousPrices[item.name] = price;
+
+
+}
+
+
+}
+
+catch(error){
+
+
+console.log(
+"خطا در دریافت قیمت",
+error
+);
+
+
+}
+
+}
+
+
+
+// دریافت اولیه
+
 updatePrices();
 
 
-// بروزرسانی خودکار هر 60 ثانیه
-setInterval(() => {
-  updatePrices();
-}, 60000);
+
+// بروزرسانی هر ۶۰ ثانیه
+
+setInterval(()=>{
+
+updatePrices();
+
+},60000);
+
+
 
 </script>
+
 
 </body>
 </html>
