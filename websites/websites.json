@@ -1,0 +1,16 @@
+{
+  "companies": [
+    {
+      "name": "دلمونتی",
+      "logo": "",
+      "url": "https://example.com",
+      "description": "وب سایت رسمی دلمونتی"
+    },
+    {
+      "name": "شرکت دوم",
+      "logo": "",
+      "url": "https://example.com",
+      "description": "وب سایت رسمی شرکت"
+    }
+  ]
+}
