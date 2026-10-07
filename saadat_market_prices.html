@@ -1,190 +1,369 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <title>قیمت لحظه‌ای بازار</title>
 
 <style>
+
 * {
   box-sizing: border-box;
 }
 
+
 body {
-  margin: 0;
-  padding: 12px;
-  background: #f4f5f8;
-  font-family: Tahoma, Arial, sans-serif;
-  direction: rtl;
+
+  margin:0;
+  padding:12px;
+
+  background:#f4f5f8;
+
+  font-family:Tahoma, Arial, sans-serif;
+
+  direction:rtl;
+
 }
+
+
+
+/* شبکه کارت‌ها */
 
 .grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
-  justify-items: center;
+
+  display:grid;
+
+  grid-template-columns:repeat(2,minmax(0,1fr));
+
+  gap:12px;
+
+  width:100%;
+
+  max-width:600px;
+
+  margin:auto;
+
 }
+
+
+
+/* کارت قیمت */
 
 .card {
-  position: relative;
-  width: 110%;
-  min-width: 0;
-  aspect-ratio: 1092 / 360;
-  overflow: hidden;
 
-  background-image: url("https://raw.githubusercontent.com/sampixel1-ctrl/saadat-news/main/price-cards.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 100% 100%;
+  position:relative;
+
+  width:100%;
+
+  min-width:0;
+
+  aspect-ratio:1092 / 360;
+
+
+  background:#ffffff;
+
+
+  border-radius:22px;
+
+
+  overflow:hidden;
+
+
+  box-shadow:
+
+  0 6px 18px rgba(0,0,0,0.12);
+
+
+  border:1px solid #f2d7e3;
+
 }
+
+
+
+/* محتوا */
 
 .info {
-  position: absolute;
-  right: 8%;
-  left: 8%;
-  top: 50%;
-  transform: translateY(-50%);
-  text-align: center;
-  min-width: 0;
+
+  position:absolute;
+
+  top:50%;
+
+  right:8%;
+
+  left:8%;
+
+  transform:translateY(-50%);
+
+  text-align:center;
+
 }
+
+
+
+/* نام */
 
 .name {
-  font-size: clamp(10px, 2.8vw, 14px);
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 5px;
-  white-space: nowrap;
+
+  font-size:clamp(10px,2.8vw,14px);
+
+  font-weight:bold;
+
+  color:#333;
+
+  margin-bottom:8px;
+
+  white-space:nowrap;
+
 }
+
+
+
+/* قیمت */
 
 .price {
-  font-size: clamp(11px, 3.1vw, 16px);
-  font-weight: bold;
-  direction: rtl;
-  white-space: nowrap;
-  color: #333;
+
+  font-size:clamp(12px,3.2vw,17px);
+
+  font-weight:bold;
+
+  color:#c90055;
+
+  white-space:nowrap;
+
 }
+
+
+
+/* افزایش */
 
 .up {
-  color: #079447;
+
+ color:#079447;
+
 }
+
+
+/* کاهش */
 
 .down {
-  color: #e32636;
+
+ color:#e32636;
+
 }
 
-@media (max-width: 350px) {
 
-  body {
-    padding: 7px;
-  }
 
-  .grid {
-    gap: 7px;
-  }
+@media(max-width:350px){
 
-  .card {
-    height: 80px;
-  }
 
-  .name {
-    font-size: 10px;
-  }
+body{
 
-  .price {
-    font-size: 11px;
-  }
+padding:7px;
+
 }
+
+
+.grid{
+
+gap:8px;
+
+}
+
+
+.name{
+
+font-size:10px;
+
+}
+
+
+.price{
+
+font-size:11px;
+
+}
+
+
+}
+
+
 </style>
+
 
 </head>
 
+
 <body>
+
+
 
 <div class="grid">
 
-  <!-- دلار -->
-  <div class="card">
-    <div class="info">
-      <div class="name">دلار آمریکا</div>
-      <div class="price" id="usd">در حال دریافت...</div>
-    </div>
-  </div>
 
 
-  <!-- یورو -->
-  <div class="card">
-    <div class="info">
-      <div class="name">یورو</div>
-      <div class="price" id="eur">در حال دریافت...</div>
-    </div>
-  </div>
+<!-- دلار -->
+
+<div class="card">
+
+<div class="info">
+
+<div class="name">
+دلار آمریکا
+</div>
+
+<div class="price" id="usd">
+در حال دریافت...
+</div>
+
+</div>
+
+</div>
 
 
-  <!-- سکه -->
-  <div class="card">
-    <div class="info">
-      <div class="name">سکه تمام طرح جدید</div>
-      <div class="price" id="coin">در حال دریافت...</div>
-    </div>
-  </div>
 
 
-  <!-- طلا -->
-  <div class="card">
-    <div class="info">
-      <div class="name">طلای ۱۸ عیار</div>
-      <div class="price" id="gold18">در حال دریافت...</div>
-    </div>
-  </div>
+
+<!-- یورو -->
+
+<div class="card">
+
+<div class="info">
+
+<div class="name">
+یورو
+</div>
+
+<div class="price" id="eur">
+در حال دریافت...
+</div>
+
+</div>
+
+</div>
+
+
+
+
+
+<!-- سکه -->
+
+<div class="card">
+
+<div class="info">
+
+<div class="name">
+سکه تمام طرح جدید
+</div>
+
+<div class="price" id="coin">
+در حال دریافت...
+</div>
+
+</div>
+
+</div>
+
+
+
+
+
+<!-- طلا -->
+
+<div class="card">
+
+<div class="info">
+
+<div class="name">
+طلای ۱۸ عیار
+</div>
+
+<div class="price" id="gold18">
+در حال دریافت...
+</div>
+
+</div>
+
+</div>
+
 
 
 </div>
 
 
+
+
+
 <script>
 
+
+
 const API =
+
 "https://api.tgju.org/v1/widget/tmp?keys=price_dollar_rl,price_eur,sekee,geram18";
+
+
+
 
 
 const items = {
 
-  price_dollar_rl: "usd",
-  price_eur: "eur",
-  sekee: "coin",
-  geram18: "gold18"
+
+price_dollar_rl:"usd",
+
+price_eur:"eur",
+
+sekee:"coin",
+
+geram18:"gold18"
+
 
 };
 
 
-const previousPrices = {};
 
 
-function formatPrice(value) {
 
-  return Math.round(value)
-  .toLocaleString("en-US") + " تومان";
+const previousPrices={};
+
+
+
+
+
+function formatPrice(value){
+
+
+return Math.round(value)
+
+.toLocaleString("en-US")
+
++" تومان";
+
 
 }
 
 
 
-async function updatePrices() {
 
-try {
+
+async function updatePrices(){
+
+
+try{
 
 
 const response = await fetch(API,{
+
 cache:"no-store"
+
 });
+
 
 
 if(!response.ok){
 
-throw new Error("خطا در دریافت اطلاعات");
+throw new Error();
 
 }
 
@@ -192,45 +371,60 @@ throw new Error("خطا در دریافت اطلاعات");
 
 const data = await response.json();
 
-const indicators = data.response.indicators;
+
+const indicators=data.response.indicators;
+
+
 
 
 
 for(const item of indicators){
 
 
-const elementId = items[item.name];
+
+const id=items[item.name];
 
 
-if(!elementId || item.p == null)
+
+if(!id || item.p==null)
+
 continue;
 
 
 
-const rawPrice = Number(
+
+
+const rawPrice=Number(
+
 String(item.p).replace(/,/g,"")
+
 );
 
 
 
+
+
 if(!Number.isFinite(rawPrice))
+
 continue;
 
 
 
-// تبدیل ریال به تومان
-
-const price = rawPrice / 10;
 
 
+// ریال به تومان
 
-const element =
-document.getElementById(elementId);
+const price=rawPrice/10;
 
 
 
-element.textContent =
-formatPrice(price);
+
+
+const element=document.getElementById(id);
+
+
+
+element.textContent=formatPrice(price);
 
 
 
@@ -241,19 +435,24 @@ element.classList.remove(
 
 
 
-// تشخیص تغییر قیمت
-
-if(previousPrices[item.name] !== undefined){
 
 
-if(price > previousPrices[item.name]){
+if(previousPrices[item.name]!==undefined){
+
+
+
+if(price>previousPrices[item.name]){
+
 
 element.classList.add("up");
 
 
 }
 
-else if(price < previousPrices[item.name]){
+
+
+else if(price<previousPrices[item.name]){
+
 
 element.classList.add("down");
 
@@ -265,10 +464,14 @@ element.classList.add("down");
 
 
 
-previousPrices[item.name] = price;
+
+
+previousPrices[item.name]=price;
+
 
 
 }
+
 
 
 }
@@ -276,29 +479,33 @@ previousPrices[item.name] = price;
 catch(error){
 
 
-console.log(
-"خطا در دریافت قیمت",
-error
-);
+console.log("خطا در دریافت قیمت");
 
 
 }
 
+
+
 }
 
 
 
-// دریافت اولیه
+
+
+// بار اول
 
 updatePrices();
 
 
 
-// بروزرسانی هر ۶۰ ثانیه
+
+// هر یک دقیقه
 
 setInterval(()=>{
 
+
 updatePrices();
+
 
 },60000);
 
@@ -308,4 +515,5 @@ updatePrices();
 
 
 </body>
+
 </html>
