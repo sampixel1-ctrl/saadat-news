@@ -1,0 +1,50 @@
+{
+  "provinces": [
+    {
+      "name": "همدان",
+      "representatives": [
+        {
+          "name": "آقای موفق",
+          "brands": [
+            "دلمونتی",
+            "برند دوم"
+          ],
+          "phone": "09xxxxxxxxx",
+          "address": "همدان، آدرس نمایندگی",
+          "lat": "",
+          "lng": ""
+        },
+        {
+          "name": "نماینده دوم",
+          "brands": [
+            "برند ۱",
+            "برند ۲",
+            "برند ۳",
+            "برند ۴",
+            "برند ۵"
+          ],
+          "phone": "09xxxxxxxxx",
+          "address": "همدان، آدرس نمایندگی",
+          "lat": "",
+          "lng": ""
+        }
+      ]
+    },
+    {
+      "name": "کرمانشاه",
+      "representatives": []
+    },
+    {
+      "name": "کردستان",
+      "representatives": []
+    },
+    {
+      "name": "مرکزی",
+      "representatives": []
+    },
+    {
+      "name": "ایلام",
+      "representatives": []
+    }
+  ]
+}
