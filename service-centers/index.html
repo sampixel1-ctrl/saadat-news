@@ -2,131 +2,53 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>نمایندگان خدمات</title>
 <style>
-*{box-sizing:border-box}
-body{margin:0;background:#f5f7fb;color:#172033;font-family:Tahoma,Arial,sans-serif}
-.header{background:linear-gradient(135deg,#172033,#34496d);color:#fff;padding:24px 18px 20px;border-radius:0 0 24px 24px}
-.header h1{margin:0 0 7px;font-size:22px}.header p{margin:0;color:#d8deea;font-size:13px}
-.wrap{padding:16px}.search{width:100%;border:1px solid #dce2ec;border-radius:14px;padding:13px 15px;font-size:14px;outline:none;background:#fff;margin-bottom:14px}
-.title{font-size:16px;font-weight:bold;margin:10px 2px 12px}
+body{margin:0;background:#f5f7fb;font-family:tahoma;color:#172033}
+.wrap{padding:15px}
 .provinces{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.province{border:0;background:#fff;border-radius:15px;padding:15px 10px;box-shadow:0 3px 12px #17203312;font-size:14px;font-weight:bold;color:#172033;min-height:58px}
-.province.active{background:#172033;color:#fff}
-.hidden{display:none}.card{background:#fff;border-radius:18px;padding:16px;margin-bottom:12px;box-shadow:0 4px 16px #17203312}
-.name{font-size:17px;font-weight:bold;margin-bottom:10px}.brands{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:14px}
-.brand{background:#eef2f7;color:#33415c;border-radius:20px;padding:6px 10px;font-size:12px}
-.info{font-size:13px;line-height:2;color:#46536a}.actions{display:flex;gap:8px;margin-top:13px}
-.btn{flex:1;border:0;border-radius:11px;padding:11px 8px;text-decoration:none;text-align:center;font-size:13px;font-weight:bold}
-.call{background:#172033;color:#fff}.map{background:#eef2f7;color:#172033}
-.empty,.error,.loading{text-align:center;background:#fff;border-radius:16px;padding:24px;color:#68748a;font-size:13px}
-.error{background:#fff0f0;color:#a33;line-height:1.8}
+.province{background:white;border:0;border-radius:15px;padding:18px;font-weight:bold}
+.active{background:#172033;color:white}
+.card{background:white;border-radius:18px;padding:15px;margin-top:12px}
+.brand{display:inline-block;background:#eef2f7;border-radius:20px;padding:6px 10px;margin:3px;font-size:12px}
+.name{font-size:17px;font-weight:bold}
+.info{line-height:2;margin-top:10px}
+.call{display:block;background:#172033;color:white;text-align:center;padding:12px;border-radius:12px;text-decoration:none;margin-top:12px}
 </style>
 </head>
 <body>
-<div class="header">
-  <h1>نمایندگان خدمات</h1>
-  <p>نمایندگان خدمات و برندهای تحت پوشش</p>
-</div>
 <div class="wrap">
-  <input id="search" class="search" placeholder="جستجوی نماینده یا برند...">
-  <div class="title">استان‌ها</div>
-  <div id="provinces" class="provinces"></div>
-  <div id="resultTitle" class="title hidden"></div>
-  <div id="results"></div>
+<div id="provinces" class="provinces"></div>
+<div id="results"></div>
 </div>
-
 <script>
-const JSON_URL = "./service_centers.json";
-let data = {provinces:[]};
-let selectedProvince = "";
+let data={provinces:[]},selected="";
+fetch("service_centers.json?v="+Date.now()).then(r=>r.json()).then(j=>{data=j;showProvinces()});
 
-async function loadData(){
-  try{
-    const res = await fetch(JSON_URL + "?v=" + Date.now(), {cache:"no-store"});
-    if(!res.ok) throw new Error();
-    data = await res.json();
-    renderProvinces();
-  }catch(e){
-    document.getElementById("results").innerHTML =
-      '<div class="error">دریافت اطلاعات نمایندگان انجام نشد.<br>اتصال اینترنت را بررسی کنید.</div>';
-  }
+function showProvinces(){
+ let b=document.getElementById("provinces");
+ b.innerHTML="";
+ data.provinces.forEach(p=>{
+  let x=document.createElement("button");
+  x.className="province "+(selected==p.name?"active":"");
+  x.innerText=p.name;
+  x.onclick=()=>{selected=p.name;showProvinces();showReps()};
+  b.appendChild(x);
+ });
 }
-
-function renderProvinces(){
-  const box=document.getElementById("provinces");
-  box.innerHTML="";
-  data.provinces.forEach(p=>{
-    const b=document.createElement("button");
-    b.className="province"+(p.name===selectedProvince?" active":"");
-    b.textContent=p.name;
-    b.onclick=()=>selectProvince(p.name);
-    box.appendChild(b);
-  });
+function showReps(){
+ let p=data.provinces.find(x=>x.name==selected);
+ document.getElementById("results").innerHTML=(p.representatives.length?
+ p.representatives.map(r=>`
+ <div class="card">
+ <div class="name">${r.name}</div>
+ <div>${(r.brands||[]).map(x=>`<span class="brand">${x}</span>`).join("")}</div>
+ <div class="info">📞 ${r.phone}<br>📍 ${r.address}</div>
+ <a class="call" href="tel:${r.phone}">تماس</a>
+ </div>`).join(""):
+ '<div class="card">نماینده‌ای ثبت نشده است</div>');
 }
-
-function selectProvince(name){
-  selectedProvince=name;
-  document.getElementById("search").value="";
-  renderProvinces();
-  renderResults();
-}
-
-function renderResults(){
-  const p=data.provinces.find(x=>x.name===selectedProvince);
-  const title=document.getElementById("resultTitle");
-  const box=document.getElementById("results");
-  if(!p){title.classList.add("hidden");box.innerHTML="";return}
-  title.classList.remove("hidden");
-  title.textContent="نمایندگان خدمات استان "+p.name;
-  if(!p.representatives.length){
-    box.innerHTML='<div class="empty">هنوز نماینده‌ای برای این استان ثبت نشده است.</div>';
-    return;
-  }
-  box.innerHTML=p.representatives.map(r=>card(r,p.name)).join("");
-}
-
-function card(rep,province){
-  const brands=(rep.brands||[]).map(b=>'<span class="brand">'+escapeHtml(b)+'</span>').join("");
-  const phone=(rep.phone||"").trim();
-  const call = phone && !phone.includes("x") ? "tel:"+phone.replace(/\s/g,"") : "#";
-  const map = rep.lat && rep.lng
-    ? "https://www.google.com/maps/search/?api=1&query="+rep.lat+","+rep.lng
-    : "https://www.google.com/maps/search/?api=1&query="+encodeURIComponent((province+" "+(rep.address||"")).trim());
-
-  return '<div class="card">'+
-    '<div class="name">'+escapeHtml(rep.name||"نماینده خدمات")+'</div>'+
-    '<div class="brands">'+brands+'</div>'+
-    '<div class="info">📞 '+escapeHtml(phone||"شماره ثبت نشده")+
-    '<br>📍 '+escapeHtml(rep.address||"آدرس ثبت نشده")+'</div>'+
-    '<div class="actions">'+
-    '<a class="btn call" href="'+call+'">تماس</a>'+
-    '<a class="btn map" href="'+map+'" target="_blank">مسیریابی</a>'+
-    '</div></div>';
-}
-
-document.getElementById("search").addEventListener("input",function(){
-  const q=this.value.trim().toLowerCase();
-  if(!q){if(selectedProvince)renderResults();return}
-  document.getElementById("resultTitle").classList.remove("hidden");
-  document.getElementById("resultTitle").textContent="نتایج جستجو";
-  const matches=[];
-  data.provinces.forEach(p=>p.representatives.forEach(r=>{
-    const text=[p.name,r.name,r.phone,r.address,...(r.brands||[])].join(" ").toLowerCase();
-    if(text.includes(q)) matches.push({p,r});
-  }));
-  document.getElementById("results").innerHTML=matches.length
-    ? matches.map(x=>card(x.r,x.p.name)).join("")
-    : '<div class="empty">موردی پیدا نشد.</div>';
-});
-
-function escapeHtml(s){
-  return String(s).replace(/[&<>"']/g,m=>({
-    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
-  }[m]));
-}
-loadData();
 </script>
 </body>
 </html>
