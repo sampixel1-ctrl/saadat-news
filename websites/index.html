@@ -1,1 +1,30 @@
-
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>وب سایت شرکت ها</title>
+<style>
+body{margin:0;padding:15px;background:#f4f5f8;font-family:tahoma;direction:rtl}
+.header{background:#c90055;color:white;padding:22px;text-align:center;border-radius:0 0 25px 25px;font-size:22px;font-weight:bold;margin:-15px -15px 20px}
+.card{background:rgba(255,255,255,.65);backdrop-filter:blur(12px);border:1.5px solid #e6006d;border-radius:22px;padding:20px;margin-bottom:15px;text-align:center;box-shadow:0 8px 20px #0002}
+.name{font-size:20px;font-weight:bold;color:#222}
+.desc{color:#555;margin:12px}
+.btn{display:block;background:#c90055;color:white;text-decoration:none;padding:13px;border-radius:15px;font-weight:bold}
+</style>
+</head>
+<body>
+<div class="header">وب سایت شرکت ها</div>
+<div id="list"></div>
+<script>
+fetch("websites.json?v="+Date.now()).then(r=>r.json()).then(d=>{
+document.getElementById("list").innerHTML=d.companies.map(c=>`
+<div class="card">
+<div class="name">${c.name}</div>
+<div class="desc">${c.description}</div>
+<a class="btn" href="${c.url}" target="_blank">ورود به سایت</a>
+</div>`).join("");
+});
+</script>
+</body>
+</html>
