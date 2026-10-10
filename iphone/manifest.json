@@ -1,0 +1,15 @@
+{
+  "name": "اپلیکیشن بازرگانی سعادت",
+  "short_name": "سعادت",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#eee6d8",
+  "theme_color": "#d10067",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}

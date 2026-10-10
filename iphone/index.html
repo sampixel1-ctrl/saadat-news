@@ -1,1 +1,133 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7f2e8">
+<title>اپلیکیشن بازرگانی سعادت</title>
+<link rel="manifest" href="./manifest.json">
+<link rel="icon" type="image/png" href="./icon-192.png">
+<link rel="apple-touch-icon" href="./icon-180.png">
+<style>
+:root{--ink:#252525;--panel:rgba(255,255,255,.9);--line:rgba(80,60,35,.22)}
+*{box-sizing:border-box}html{min-height:100%;background:#eee6d8}
+body{margin:0;min-height:100vh;min-height:100dvh;padding:max(16px,env(safe-area-inset-top)) 16px max(24px,env(safe-area-inset-bottom));color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,Arial,sans-serif;background:transparent;position:relative}
+/* Fixed background layer: remains stationary while content scrolls. */
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:#eee6d8 url('./backgrund.png') center center / cover no-repeat;-webkit-transform:translateZ(0);transform:translateZ(0)}
+main{position:relative;z-index:1;width:100%;max-width:560px;margin:0 auto}
+.logo-wrap{display:flex;justify-content:center;align-items:center;margin:8px auto 18px}.logo{display:block;width:min(100%,360px);height:auto;object-fit:contain}
+.banner-wrap{width:100%;overflow:hidden;border-radius:12px}.banner{display:block;width:100%;height:auto;aspect-ratio:16/7;object-fit:contain;border-radius:12px;user-select:none;-webkit-user-drag:none;touch-action:pan-y}
+.panel{margin-top:14px;padding:14px 16px 16px;background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:0 3px 14px rgba(30,20,10,.09);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+.heading{margin:0;text-align:center;font-size:18px;line-height:1.6;font-weight:700}.message{margin:10px 0 0;text-align:right;direction:rtl;white-space:pre-wrap;overflow-wrap:anywhere;font-size:16px;line-height:1.9}
+.market-heading{margin:0 0 8px;text-align:center;font-size:18px;line-height:1.6;font-weight:700}.market-frame{display:block;width:100%;height:220px;border:0;border-radius:12px;background:rgba(255,255,255,.7)}.market-note{font-size:12px;color:#655b54;text-align:center;line-height:1.7;margin:8px 0 0}.market-link{color:#a40051}
+@media(max-width:350px){body{padding-left:8px;padding-right:8px}.market-frame{height:235px}}
 
+.service-section{text-align:center}
+.section-title-img{display:block;margin:0 auto 14px;max-width:90%;height:auto}
+.service-btn-img{display:block;margin:0 auto;max-width:90%;height:auto;cursor:pointer}
+ .agents-section{text-align:center}.agent-buttons{display:flex;justify-content:center;gap:14px;direction:rtl}.agent-btn{width:42%;max-width:180px;height:auto;cursor:pointer}.agent-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:10;padding:30px 20px}.agent-box{max-width:420px;margin:auto;background:white;border-radius:18px;padding:20px;text-align:center;max-height:85vh;overflow:auto}.agent-box h2{margin:0 0 15px}.agent-list{display:flex;flex-direction:column;gap:10px}.agent-list button,.close-agent{border:0;border-radius:14px;padding:13px;font-size:18px;background:#d10067;color:#fff;cursor:pointer}.close-agent{margin-top:15px;width:100%;background:#555}.main-action-btn,.agent-btn{width:90px;height:auto;max-width:22vw;object-fit:contain;display:block;}\n</style></head>
+<body><main>
+<div class="logo-wrap"><img class="logo" src="./logo.png" alt="لوگوی بازرگانی سعادت"></div>
+<div class="banner-wrap"><img id="banner" class="banner" src="https://raw.githubusercontent.com/sampixel1-ctrl/saadat-news/main/banners/banner1.png" alt="بنر اطلاع‌رسانی" draggable="false"></div>
+<section class="panel" aria-live="polite"><h1 id="notice-heading" class="heading">اطلاعیه</h1><p id="notice-message" class="message">در حال دریافت اطلاعیه…</p></section>
+<section class="panel"><h2 class="market-heading">قیمت لحظه‌ای بازار</h2>
+<!-- Use the GitHub Pages URL, not raw.githubusercontent.com. GitHub raw file URLs can refuse iframe embedding. -->
+<iframe class="market-frame" src="https://sampixel1-ctrl.github.io/saadat-news/saadat_market_prices.html" title="قیمت دلار، یورو، سکه و طلای ۱۸ عیار" loading="lazy" scrolling="no" referrerpolicy="no-referrer"></iframe>
+
+</section>
+<section class="panel service-section">
+  <img class="section-title-img" src="./images/titles/L1.png" alt="مراکز خدمات">
+  <a href="https://sampixel1-ctrl.github.io/saadat-news/service-centers/" target="_blank" rel="noopener">
+    <img class="service-btn-img" src="./images/buttons/b2.png" alt="مراکز خدمات">
+  </a>
+</section>
+<section class="panel service-section">
+  <img class="section-title-img" src="./images/titles/L2.png" alt="نمایندگان">
+  <div class="agent-buttons">
+    <img class="agent-btn" src="./images/buttons/b3.png" onclick="location.href='pages/agents-006-015.html'" alt="006 تا 015">
+    <img class="agent-btn" src="./images/buttons/b4.png" onclick="location.href='pages/agents-001-005.html'" alt="001 تا 005">
+  </div>
+</section>
+<section class="panel" style="text-align:center">
+<img src="./images/titles/L3.png" style="max-width:100%;display:block;margin:0 auto 15px">
+<div style="display:flex;justify-content:center;gap:20px;align-items:center">
+<a href="https://sampixel1-ctrl.github.io/saadat-news/websites/"><img class="main-action-btn" src="./images/buttons/b6.png" alt="b6"></a>
+<a href="./pages/k-buttons.html"><img class="main-action-btn" src="./images/buttons/b5.png" alt="b5"></a>
+</div>
+</section>
+
+<section class="panel" style="text-align:center">
+  <img src="./images/titles/L4.png" class="section-title-img" alt="L4">
+  <div style="display:grid;grid-template-columns:repeat(6,auto);justify-content:center;gap:8px;margin-top:15px;align-items:center">
+    <a href="http://t.me/saadatpakhsh1"><img class="main-action-btn" src="./images/buttons/m6.png"></a>
+    <a href="https://chat.whatsapp.com/KdB153SFdgvBQzA4rcZY1Y"><img class="main-action-btn" src="./images/buttons/m5.png"></a>
+    <a href="https://rubika.ir/pakhshsaadat"><img class="main-action-btn" src="./images/buttons/m4.png"></a>
+    <a href="https://nshn.ir/70_bsU78y56-6k"><img class="main-action-btn" src="./images/buttons/m3.png"></a>
+    <a href="https://balad.ir/p/2C2kY0sgss98sG"><img class="main-action-btn" src="./images/buttons/m2.png"></a>
+    <a href="https://maps.app.goo.gl/QTYjMjkc3VyipFPV7"><img class="main-action-btn" src="./images/buttons/m1.png"></a>
+  </div>
+</section>
+<div style="text-align:center;margin:25px 0;font-size:14px;color:#666">SAADAT APP Version 2.0</div>
+</main>
+
+
+<script>
+(()=>{
+const BANNERS_URL='https://raw.githubusercontent.com/sampixel1-ctrl/saadat-news/main/banners.json';
+const NEWS_URL='https://raw.githubusercontent.com/sampixel1-ctrl/saadat-news/main/news.json';
+const banner=document.getElementById('banner');let urls=[1,2,3].map(n=>`https://raw.githubusercontent.com/sampixel1-ctrl/saadat-news/main/banners/banner${n}.png`),i=0,timer=null,held=false;
+function start(){clearInterval(timer);if(!held&&urls.length>1)timer=setInterval(()=>{i=(i+1)%urls.length;banner.src=urls[i]},5000)}
+function pause(){held=true;clearInterval(timer)}function resume(){held=false;start()}
+banner.addEventListener('pointerdown',pause);['pointerup','pointercancel','pointerleave'].forEach(e=>banner.addEventListener(e,resume));banner.addEventListener('contextmenu',e=>e.preventDefault());
+fetch(BANNERS_URL+'?t='+Date.now(),{cache:'no-store'}).then(r=>{if(!r.ok)throw 0;return r.json()}).then(d=>{const list=[d.banner1,d.banner2,d.banner3].filter(x=>typeof x==='string'&&x);if(list.length){urls=list;i=0;banner.src=urls[0];start()}}).catch(start);
+function fmtDate(d){if(!d)return '';const p=String(d).trim().split(/[\/.-]/);return p.length===3&&p[0].length===4?`${p[2].padStart(2,'0')}-${p[1].padStart(2,'0')}-${p[0]}`:String(d).replaceAll('/','-')}
+async function loadNews(){try{const r=await fetch(NEWS_URL+'?t='+Date.now(),{cache:'no-store'});if(!r.ok)throw 0;const d=await r.json();document.getElementById('notice-heading').textContent=(d.title||'اطلاعیه')+(fmtDate(d.date)?' '+fmtDate(d.date):'');document.getElementById('notice-message').textContent=typeof d.message==='string'?d.message:''}catch(e){document.getElementById('notice-heading').textContent='اطلاعیه';document.getElementById('notice-message').textContent='اطلاعیه در حال حاضر دریافت نشد.'}}
+loadNews();setInterval(loadNews,60000);
+})();
+
+function openList(type){
+ let data=type==='006-015'?[
+['006','https://drive.google.com/file/d/1atGCxxi_BIxvpSH852i2L8JHHkNfwDoN/view?usp=drive_link'],
+['007','https://drive.google.com/file/d/1XlkwzGbNygKEPwRhyEM7s1o3HCzy7wdV/view?usp=drive_link'],
+['008','https://drive.google.com/file/d/1SgFFpv55n-_AAcScMpEcR1Pef1xJuXg2/view?usp=drive_link'],
+['009','https://drive.google.com/file/d/1pRtfyR-5C9g948bsSrapA6A7TnTYo4sB/view?usp=drive_link'],
+['010','https://drive.google.com/file/d/1Af5TgPMm-KaIMIglD6rFyw1ifckMi4zw/view?usp=drive_link'],
+['011','https://drive.google.com/file/d/1CvwyEr7C7yo08SLHHKIsZppzshf6g4hY/view?usp=drive_link'],
+['012','https://drive.google.com/file/d/1rprNISRNOVVPh9hOHf0oti4dr08_3hHx/view?usp=drive_link'],
+['013','https://drive.google.com/file/d/1D5nY2jF4f1hRJLB1qMFIRYnYUEK4Z3Yv/view?usp=drive_link'],
+['014','https://drive.google.com/file/d/1sE67Z9FVO71lxckZkooqCFA6HC1HCWSd/view?usp=drive_link'],
+['015','https://drive.google.com/file/d/1GisnSkDXIO-Vcmy1PAB3KUmkEJLjc8PG/view?usp=drive_link']]
+:[
+['001','https://drive.google.com/file/d/1vgVdRC4cr_kvD58BzFFUXJARSwYB8s-h/view?usp=drive_link'],
+['002','https://drive.google.com/file/d/1ozvnr6aXc-GweTtPCQIOieqTMovJpQ-J/view?usp=drive_link'],
+['003','https://drive.google.com/file/d/1BCUgFF24p3KKdLMdr6Y1bPrhZBTt_AQc/view?usp=drive_link'],
+['004','https://drive.google.com/file/d/1UtL_DUsqfc2OUqGIGeI9cYf_LRWQZlL5/view?usp=drive_link'],
+['005','https://drive.google.com/file/d/15_SzpNPGb3zGQkF8qb9ZynQ5uSgz1QxS/view?usp=drive_link']];
+let w=window.open('','_blank'); w.document.write('<h2 style="text-align:center">نمایندگان</h2>'+data.map(x=>`<p style="text-align:center"><a style="font-size:24px" target="_blank" href="${x[1]}">${x[0]}</a></p>`).join(''));
+}
+
+function openList(type){
+ const a={
+ "001-005":["1vgVdRC4cr_kvD58BzFFUXJARSwYB8s-h","1ozvnr6aXc-GweTtPCQIOieqTMovJpQ-J","1BCUgFF24p3KKdLMdr6Y1bPrhZBTt_AQc","1UtL_DUsqfc2OUqGIGeI9cYf_LRWQZlL5","15_SzpNPGb3zGQkF8qb9ZynQ5uSgz1QxS"],
+ "006-015":["1atGCxxi_BIxvpSH852i2L8JHHkNfwDoN","1XlkwzGbNygKEPwRhyEM7s1o3HCzy7wdV","1SgFFpv55n-_AAcScMpEcR1Pef1xJuXg2","1pRtfyR-5C9g948bsSrapA6A7TnTYo4sB","1Af5TgPMm-KaIMIglD6rFyw1ifckMi4zw","1CvwyEr7C7yo08SLHHKIsZppzshf6g4hY","1rprNISRNOVVPh9hOHf0oti4dr08_3hHx","1D5nY2jF4f1hRJLB1qMFIRYnYUEK4Z3Yv","1sE67Z9FVO71lxckZkooqCFA6HC1HCWSd","1GisnSkDXIO-Vcmy1PAB3KUmkEJLjc8PG"]};
+ const start=type==='001-005'?1:6; let box=document.getElementById('agentList'); box.innerHTML=''; document.getElementById('agentTitle').textContent=type;
+ a[type].forEach((id,i)=>{let b=document.createElement('button');b.textContent=String(start+i).padStart(3,'0');b.onclick=()=>window.open('https://drive.google.com/file/d/'+id+'/view','_blank');box.appendChild(b)});
+ document.getElementById('agentModal').style.display='block';}
+function closeList(){document.getElementById('agentModal').style.display='none';}
+
+// Pull down refresh support for mobile Web App / WebView
+(()=>{
+ let startY=0, pulling=false;
+ document.addEventListener('touchstart',e=>{
+   if(window.scrollY===0){ startY=e.touches[0].clientY; pulling=true; }
+ },{passive:true});
+ document.addEventListener('touchend',e=>{
+   if(!pulling) return;
+   const endY=e.changedTouches[0].clientY;
+   if(endY-startY>90){
+      location.reload();
+   }
+   pulling=false;
+ },{passive:true});
+})();
+</script></body></html>
