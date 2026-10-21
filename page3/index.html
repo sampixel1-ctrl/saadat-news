@@ -1,0 +1,81 @@
+<!DOCTYPE html><html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0f766e"><title>لیست قیمت</title>
+<style>
+:root{--bg:#eef2f6;--card:#fff;--tx:#0f172a;--mu:#64748b;--ac:#0f766e;--ac2:#14b8a6;--bd:#e2e8f0;--chip:#ccfbf1;--chipt:#0f766e}
+@media(prefers-color-scheme:dark){:root{--bg:#0b1115;--card:#151c23;--tx:#e8eef4;--mu:#94a3b8;--ac:#2dd4bf;--ac2:#14b8a6;--bd:#26313b;--chip:#134e4a;--chipt:#5eead4}}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:Vazirmatn,Tahoma,sans-serif;background:var(--bg);color:var(--tx);padding-bottom:110px;min-height:100vh}
+header{background:linear-gradient(135deg,#0f766e,#14b8a6);padding:calc(env(safe-area-inset-top,0px) + 22px) 16px 64px;text-align:center;border-radius:0 0 32px 32px;color:#fff}
+header img{max-height:70px;max-width:75%;filter:drop-shadow(0 2px 6px #0003)}header b{font-size:22px}
+main{max-width:560px;margin:-40px auto 0;padding:0 14px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:22px;padding:22px;box-shadow:0 10px 30px #0f172a14;animation:up .45s ease both}
+@keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.chip{display:inline-block;background:var(--chip);color:var(--chipt);padding:4px 14px;border-radius:99px;font-size:13px;font-weight:700}
+h1{font-size:22px;margin:12px 0 6px;line-height:1.7}
+.model{display:inline-block;border:1px dashed var(--bd);color:var(--mu);padding:2px 12px;border-radius:10px;font-size:13px;direction:ltr}
+.desc{color:var(--mu);line-height:2;font-size:15px;margin:14px 0 0}
+.price{margin-top:18px;padding:18px;border-radius:18px;background:linear-gradient(135deg,#0f766e,#14b8a6);color:#fff;text-align:center}
+.price small{display:block;opacity:.85;font-size:13px}.price b{font-size:32px;display:block;margin-top:2px}.price span{font-size:15px;opacity:.9}
+.meta{display:flex;justify-content:space-between;gap:8px;margin-top:14px;color:var(--mu);font-size:13px;flex-wrap:wrap}
+.note{margin-top:10px;color:var(--mu);font-size:12px;text-align:center}
+.home{text-align:center;padding:30px 20px}.home svg{width:110px;height:110px;color:var(--ac)}.home h2{margin:14px 0 6px}.home p{color:var(--mu);line-height:2;margin:0}
+.bar{position:fixed;left:0;right:0;bottom:0;padding:12px 16px calc(env(safe-area-inset-bottom,0px) + 12px);background:linear-gradient(transparent,var(--bg) 35%)}
+.bar button{display:block;width:100%;max-width:560px;margin:auto;border:0;border-radius:16px;padding:16px;font:inherit;font-size:17px;font-weight:700;color:#fff;background:linear-gradient(135deg,#0f766e,#14b8a6);box-shadow:0 8px 22px #0f766e55;cursor:pointer}
+.bar button:active{transform:scale(.98)}
+#sc{position:fixed;inset:0;background:#000;z-index:9;display:none}
+#sc video{width:100%;height:100%;object-fit:cover}
+.fr{position:absolute;top:50%;left:50%;width:min(68vw,300px);aspect-ratio:1;transform:translate(-50%,-50%);border-radius:24px;box-shadow:0 0 0 100vmax #0009}
+.fr i{position:absolute;width:38px;height:38px;border:5px solid #2dd4bf}
+.fr i:nth-child(1){top:-3px;left:-3px;border-right:0;border-bottom:0;border-radius:24px 0 0 0}.fr i:nth-child(2){top:-3px;right:-3px;border-left:0;border-bottom:0;border-radius:0 24px 0 0}
+.fr i:nth-child(3){bottom:-3px;left:-3px;border-right:0;border-top:0;border-radius:0 0 0 24px}.fr i:nth-child(4){bottom:-3px;right:-3px;border-left:0;border-top:0;border-radius:0 0 24px 0}
+.fr u{position:absolute;left:8%;right:8%;height:3px;background:#2dd4bf;box-shadow:0 0 12px #2dd4bf;animation:ln 2s ease-in-out infinite alternate}
+@keyframes ln{from{top:8%}to{top:90%}}
+#sc p{position:absolute;bottom:14%;left:0;right:0;text-align:center;color:#fff;font-size:15px;margin:0;padding:0 20px}
+#sc button{position:absolute;top:calc(env(safe-area-inset-top,0px) + 16px);right:16px;width:44px;height:44px;border-radius:50%;border:0;background:#0008;color:#fff;font-size:20px}
+.md{position:fixed;inset:0;background:#0009;backdrop-filter:blur(4px);z-index:20;display:none;align-items:center;justify-content:center;padding:20px}
+.bx{background:var(--card);color:var(--tx);border-radius:24px;padding:28px 22px 22px;max-width:340px;width:100%;text-align:center;animation:up .3s ease both}
+.bx .ic{width:72px;height:72px;margin:0 auto 12px;border-radius:50%;background:var(--chip);display:flex;align-items:center;justify-content:center;font-size:34px}
+.bx h3{margin:0 0 8px;font-size:19px}.bx p{margin:0 0 20px;color:var(--mu);line-height:2;font-size:15px}
+.bs{display:flex;gap:10px}.bs button{flex:1;border:0;border-radius:14px;padding:14px;font:inherit;font-size:16px;font-weight:700;cursor:pointer}
+.bs .y{background:linear-gradient(135deg,#0f766e,#14b8a6);color:#fff}.bs .n{background:var(--bg);color:var(--tx);border:1px solid var(--bd)}
+#ts{position:fixed;left:16px;right:16px;bottom:100px;margin:auto;max-width:420px;background:#0f172a;color:#fff;padding:12px 16px;border-radius:14px;text-align:center;font-size:14px;line-height:1.9;z-index:30;display:none}
+</style></head><body>
+<header id="hd"></header><main id="app"></main>
+<div class="bar"><button id="bt" onclick="scan()">اسکن QR</button></div>
+<div id="sc"><video id="v" playsinline muted></video><div class="fr"><i></i><i></i><i></i><i></i><u></u></div><p id="hint">QR زیر محصول را داخل کادر بگیرید</p><button onclick="closeScan()" aria-label="بستن">✕</button></div>
+<div id="pm" class="md"><div class="bx"><div class="ic">📷</div><h3>دسترسی به اسکن</h3><p>برای اسکن QR محصول و دیدن قیمت روز، اجازهٔ استفاده از دوربین را می‌دهید؟</p><div class="bs"><button class="y" onclick="ask(1)">بله</button><button class="n" onclick="ask(0)">خیر</button></div></div></div><div id="ts"></div>
+<script>
+const $=s=>document.querySelector(s);let D={settings:{},brands:[],products:[]},stream=null,run=0,idle=0;
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmt=n=>Number(n).toLocaleString('fa-IR');
+async function init(){
+ try{const r=await fetch('data.json?t='+Date.now());if(r.ok)D=await r.json()}catch(e){}
+ const s=D.settings||{},st=s.store||'فروشگاه';document.title=st;
+ $('#hd').innerHTML=s.logo?`<img src="${esc(s.logo)}" alt="${esc(st)}" onerror="this.outerHTML='<b>${esc(st)}</b>'">`:`<b>${esc(st)}</b>`;
+ const p=new URLSearchParams(location.search).get('p');p?show(p):home()}
+function home(auto){$('#bt').textContent='اسکن QR';$('#app').innerHTML=`<div class="card home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8V6a2 2 0 0 1 2-2h2M16 4h2a2 2 0 0 1 2 2v2M20 16v2a2 2 0 0 1-2 2h-2M8 20H6a2 2 0 0 1-2-2v-2"/><rect x="8" y="8" width="3" height="3"/><rect x="13" y="8" width="3" height="3"/><rect x="8" y="13" width="3" height="3"/><path d="M13 13h3v3"/></svg><h2>خوش آمدید</h2><p>برای دیدن قیمت روز، QR زیر محصول را اسکن کنید.</p></div>`;if(auto)scan()}
+function show(id){const p=D.products.find(x=>x.id==id),b=p&&D.brands.find(x=>x.id==p.b)||{};$('#bt').textContent='بازگشت به اسکن';
+ $('#app').innerHTML=p?`<div class="card"><span class="chip">${esc(b.name)}</span><h1>${esc(p.n)}</h1>${p.m?`<span class="model">${esc(p.m)}</span>`:''}${p.d?`<p class="desc">${esc(p.d)}</p>`:''}<div class="price"><small>قیمت</small>${p.p?`<b>${fmt(p.p)}</b><span>تومان</span>`:'<b style="font-size:22px">تماس بگیرید</b>'}</div><div class="meta"><span>تاریخ آخرین لیست:</span><span>${esc(b.date||'-')}</span></div>${b.note?`<div class="note">${esc(b.note)}</div>`:''}</div>`
+ :`<div class="card home"><h2>محصول پیدا نشد</h2><p>ممکن است این محصول از لیست حذف شده باشد.</p></div>`;scrollTo(0,0)}
+function ext(t){try{const p=new URL(t).searchParams.get('p');if(p)return p}catch(e){}return D.products.some(x=>x.id==t)?t:null}
+async function scan(){if(stream&&stream.active)return start();let st='prompt';try{st=(await navigator.permissions.query({name:'camera'})).state}catch(e){}
+ if(st=='granted')return start();if(st=='denied')return toast('دسترسی دوربین برای این سایت بسته است. از تنظیمات مرورگر (قفل کنار آدرس) آن را فعال کنید.');$('#pm').style.display='flex'}
+function ask(y){$('#pm').style.display='none';y?start():toast('برای اسکن QR دسترسی به دوربین لازم است.')}
+function toast(t){const e=$('#ts');e.textContent=t;e.style.display='block';clearTimeout(e.t);e.t=setTimeout(()=>e.style.display='none',4500)}
+let bd=null;try{if('BarcodeDetector' in window)bd=new BarcodeDetector({formats:['qr_code']})}catch(e){}
+function loadQR(){if(window.jsQR)return Promise.resolve();const U=['https://cdnjs.cloudflare.com/ajax/libs/jsQR/1.4.0/jsQR.min.js','https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js','https://unpkg.com/jsqr@1.4.0/dist/jsQR.js'];return U.reduce((p,u)=>p.catch(()=>new Promise((ok,no)=>{const e=document.createElement('script');e.src=u;e.onload=()=>window.jsQR?ok():no();e.onerror=no;document.head.appendChild(e)})),Promise.reject())}
+function em(e){const n=e&&e.name||'';const m={NotAllowedError:'دسترسی دوربین برای این مرورگر یا سایت بسته است. در تنظیمات مرورگر برای همین سایت اجازه دهید و صفحه را دوباره باز کنید.',SecurityError:'دسترسی دوربین مسدود است.',NotFoundError:'دوربینی روی این دستگاه پیدا نشد.',NotReadableError:'دوربین در حال استفاده توسط برنامهٔ دیگری است. آن را ببندید و دوباره تلاش کنید.',NoSecure:'اسکن فقط در مرورگر اصلی و روی آدرس https کار می‌کند. اگر لینک را داخل تلگرام، بله یا اینستاگرام باز کرده‌اید، «باز کردن در مرورگر» را بزنید.'};return(m[n]||'باز کردن دوربین ممکن نشد.')+' ['+(n||'error')+']'}
+async function start(){const o=$('#sc');o.style.display='block';clearTimeout(idle);const my=++run,h=$('#hint');h.textContent='در حال باز کردن دوربین...';const v=$('#v');
+ try{if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia)throw{name:'NoSecure'};
+  if(!stream||!stream.active){const g=c=>navigator.mediaDevices.getUserMedia(c);try{stream=await g({video:{facingMode:{ideal:'environment'}}})}catch(e){if(e.name=='NotAllowedError'||e.name=='SecurityError')throw e;stream=await g({video:true})}}
+  v.srcObject=stream;await v.play()}catch(e){h.textContent=em(e);return}
+ if(!bd){try{await loadQR()}catch(e){h.textContent='کتابخانهٔ اسکن بارگذاری نشد. اینترنت را بررسی کنید و دوباره تلاش کنید.';return}}
+ if(my!=run)return;h.textContent='QR زیر محصول را داخل کادر بگیرید';
+ const cv=document.createElement('canvas'),cx=cv.getContext('2d',{willReadFrequently:true});
+ const dec=async()=>{if(bd){try{const c=await bd.detect(v);return c.length?c[0].rawValue:null}catch(e){return null}}
+  const w=Math.min(640,v.videoWidth),k=w*v.videoHeight/v.videoWidth;cv.width=w;cv.height=k;cx.drawImage(v,0,0,w,k);const r=jsQR(cx.getImageData(0,0,w,k).data,w,k);return r&&r.data};
+ (async function lp(){if(my!=run)return;if(v.videoWidth){const t=await dec();if(my!=run)return;if(t){const id=ext(t);if(id){go(id);return}h.textContent='این QR مربوط به این فروشگاه نیست'}}requestAnimationFrame(lp)})()}
+function go(id){closeScan();history.replaceState(0,'','?p='+id);show(id)}
+function kill(){if(stream){stream.getTracks().forEach(t=>t.stop());stream=null}}
+function closeScan(){run++;$('#sc').style.display='none';clearTimeout(idle);idle=setTimeout(kill,90000)}
+init();
+</script></body></html>
