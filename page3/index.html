@@ -38,6 +38,7 @@ h1{font-size:22px;margin:12px 0 6px;line-height:1.7}
 .bs{display:flex;gap:10px}.bs button{flex:1;border:0;border-radius:14px;padding:14px;font:inherit;font-size:16px;font-weight:700;cursor:pointer}
 .bs .y{background:linear-gradient(135deg,var(--p),var(--p2));color:#fff}.bs .n{background:var(--bg);color:var(--tx);border:1px solid var(--bd)}
 #ts{position:fixed;left:16px;right:16px;bottom:100px;margin:auto;max-width:420px;background:#0f172a;color:#fff;padding:12px 16px;border-radius:14px;text-align:center;font-size:14px;line-height:1.9;z-index:30;display:none}
+body{opacity:0}body.rd{opacity:1;transition:opacity .25s ease}
 </style></head><body>
 <header id="hd"></header><main id="app"></main>
 <div class="bar"><button id="bt" onclick="scan()">اسکن QR</button></div>
@@ -51,7 +52,7 @@ let BASE=null;
 function paint(im){try{const c=document.createElement('canvas');c.width=c.height=48;const x=c.getContext('2d');x.drawImage(im,0,0,48,48);const d=x.getImageData(0,0,48,48).data,B={};
  for(let i=0;i<d.length;i+=4){if(d[i+3]<128)continue;const r=d[i],g=d[i+1],b=d[i+2],mx=Math.max(r,g,b),mn=Math.min(r,g,b);if(mx<60||mn>225||(mx-mn)/mx<.35)continue;const k=[r>>5,g>>5,b>>5].join(),o=B[k]||(B[k]={n:0,r:0,g:0,b:0});o.n++;o.r+=r;o.g+=g;o.b+=b}
  const t=Object.values(B).sort((a,b)=>b.n-a.n)[0];if(!t||t.n<8)return;let c3=[t.r/t.n,t.g/t.n,t.b/t.n];
- while(.299*c3[0]+.587*c3[1]+.114*c3[2]>150)c3=c3.map(v=>v*.88);BASE=c3.map(Math.round);applyTheme();matchMedia('(prefers-color-scheme: dark)').addEventListener('change',applyTheme)}catch(e){}}
+ while(.299*c3[0]+.587*c3[1]+.114*c3[2]>150)c3=c3.map(v=>v*.88);BASE=c3.map(Math.round);applyTheme();try{localStorage.setItem('pq_base',JSON.stringify(BASE))}catch(e){}}catch(e){}}
 function applyTheme(){if(!BASE)return;const dk=matchMedia('(prefers-color-scheme: dark)').matches,mx=(a,b,t)=>a.map((v,i)=>Math.round(v*(1-t)+b[i]*t)),h=a=>'rgb('+a+')',S=document.documentElement.style,W=[255,255,255];
  S.setProperty('--p',h(BASE));S.setProperty('--p2',h(mx(BASE,W,.3)));
  if(dk){S.setProperty('--ac',h(mx(BASE,W,.45)));S.setProperty('--chipt',h(mx(BASE,W,.6)));S.setProperty('--chip',h(mx(BASE,[21,28,35],.72)));S.removeProperty('--bg')}
@@ -61,7 +62,7 @@ async function init(){
  try{const r=await fetch('data.json?t='+Date.now());if(r.ok)D=await r.json()}catch(e){}
  const s=D.settings||{},st=s.store||'فروشگاه';document.title=st;
 const hd=$('#hd'),im=new Image();hd.innerHTML='<b></b>';hd.firstChild.textContent=st;im.alt=st;
- im.onload=()=>{hd.innerHTML='<span class="plq"></span>';hd.firstChild.appendChild(im);paint(im)};im.src=s.logo||'logo.png';
+ im.onload=()=>{hd.innerHTML='<span class="plq"></span>';hd.firstChild.appendChild(im);paint(im);ready()};im.onerror=ready;setTimeout(ready,1800);im.src=s.logo||'logo.png';
  const p=new URLSearchParams(location.search).get('p');p?show(p):home()}
 function home(auto){$('#bt').textContent='اسکن QR';$('#app').innerHTML=`<div class="card home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8V6a2 2 0 0 1 2-2h2M16 4h2a2 2 0 0 1 2 2v2M20 16v2a2 2 0 0 1-2 2h-2M8 20H6a2 2 0 0 1-2-2v-2"/><rect x="8" y="8" width="3" height="3"/><rect x="13" y="8" width="3" height="3"/><rect x="8" y="13" width="3" height="3"/><path d="M13 13h3v3"/></svg><h2>خوش آمدید</h2><p>برای دیدن قیمت روز، QR زیر محصول را اسکن کنید.</p></div>`;if(auto)scan()}
 function show(id){const p=D.products.find(x=>x.id==id),b=p&&D.brands.find(x=>x.id==p.b)||{};$('#bt').textContent='بازگشت به اسکن';
@@ -88,5 +89,8 @@ async function start(){const o=$('#sc');o.style.display='block';clearTimeout(idl
 function go(id){closeScan();history.replaceState(0,'','?p='+id);show(id)}
 function kill(){if(stream){stream.getTracks().forEach(t=>t.stop());stream=null}}
 function closeScan(){run++;$('#sc').style.display='none';clearTimeout(idle);idle=setTimeout(kill,90000)}
+function ready(){document.body.classList.add('rd')}
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change',applyTheme);
+try{const c=JSON.parse(localStorage.getItem('pq_base'));if(Array.isArray(c)&&c.length==3){BASE=c;applyTheme();ready()}}catch(e){}
 init();
 </script></body></html>
