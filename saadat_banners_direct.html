@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="referrer" content="no-referrer">
+<title>بنرهای سعادت</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden;background:transparent;font-family:Tahoma,Arial,sans-serif}
+#carousel{position:relative;width:100%;height:100%;min-height:90px;overflow:hidden;border-radius:12px;background:#f0f0f0}
+.slide{position:absolute;inset:0;width:100%;height:100%;opacity:0;transition:opacity .35s ease;pointer-events:none}
+.slide.active{opacity:1}
+.slide img{display:block;width:100%;height:100%;object-fit:contain}
+#dots{position:absolute;z-index:3;left:0;right:0;bottom:7px;display:flex;justify-content:center;gap:6px;pointer-events:none}
+.dot{width:7px;height:7px;border-radius:8px;background:rgba(70,70,70,.35);border:1px solid rgba(255,255,255,.8)}
+.dot.active{width:18px;background:#c72c61}
+#message{display:none;position:absolute;inset:0;align-items:center;justify-content:center;text-align:center;padding:12px;color:#666;font-size:13px}
+</style>
+</head>
+<body>
+<div id="carousel">
+  <div id="message">اتصال اینترنت را بررسی کنید.</div>
+  <div id="dots"><span class="dot active"></span><span class="dot"></span><span class="dot"></span></div>
+</div>
+<script>
+(function(){
+  // نام فایل‌ها ثابت است؛ فقط همین تصاویر را در GitHub جایگزین کنید.
+  var imageUrls = [
+    'https://raw.githubusercontent.com/sampixel1-ctrl/saadat-news/main/banners/banner1.png',
+    'https://raw.githubusercontent.com/sampixel1-ctrl/saadat-news/main/banners/banner2.png',
+    'https://raw.githubusercontent.com/sampixel1-ctrl/saadat-news/main/banners/banner3.png'
+  ];
+  var root=document.getElementById('carousel');
+  var dots=Array.prototype.slice.call(document.querySelectorAll('.dot'));
+  var message=document.getElementById('message');
+  var slides=[], current=0, rotation=null;
+
+  function fresh(url){return url+(url.indexOf('?')>=0?'&':'?')+'refresh='+Date.now();}
+
+  imageUrls.forEach(function(url,index){
+    var slide=document.createElement('div');
+    slide.className='slide'+(index===0?' active':'');
+    var img=document.createElement('img');
+    img.alt='بنر سعادت '+(index+1);
+    img.src=fresh(url);
+    img.onerror=function(){ if(index===0) message.style.display='flex'; };
+    img.onload=function(){ if(index===0) message.style.display='none'; };
+    slide.appendChild(img);
+    root.insertBefore(slide,document.getElementById('dots'));
+    slides.push(slide);
+  });
+
+  function show(index){
+    current=(index+slides.length)%slides.length;
+    slides.forEach(function(s,i){s.classList.toggle('active',i===current);});
+    dots.forEach(function(d,i){d.classList.toggle('active',i===current);});
+  }
+  rotation=setInterval(function(){show(current+1);},5000);
+
+  var startX=0;
+  root.addEventListener('touchstart',function(e){startX=e.changedTouches[0].clientX;},{passive:true});
+  root.addEventListener('touchend',function(e){
+    var dx=e.changedTouches[0].clientX-startX;
+    if(Math.abs(dx)>35){show(current+(dx<0?1:-1));}
+  },{passive:true});
+
+  // Refresh image URLs every 5 minutes to pick up replaced GitHub images.
+  setInterval(function(){
+    slides.forEach(function(slide,i){
+      var img=slide.querySelector('img');
+      img.src=fresh(imageUrls[i]);
+    });
+  },300000);
+})();
+</script>
+</body>
+</html>
