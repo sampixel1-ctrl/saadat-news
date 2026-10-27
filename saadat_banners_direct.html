@@ -6,21 +6,21 @@
 <meta name="referrer" content="no-referrer">
 <title>بنرهای سعادت</title>
 <style>
-*{box-sizing:border-box}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden;background:transparent;font-family:Tahoma,Arial,sans-serif}
-#carousel{position:relative;width:100%;height:100%;min-height:90px;overflow:hidden;border-radius:12px;background:#f0f0f0;touch-action:pan-y}
+#carousel{position:relative;width:100%;height:100%;min-height:90px;overflow:hidden;border-radius:12px;background:#f0f0f0;touch-action:pan-y;user-select:none;-webkit-user-select:none}
 .slide{position:absolute;inset:0;width:100%;height:100%;opacity:0;transition:opacity .25s ease;pointer-events:none}
 .slide.active{opacity:1}
-.slide img{display:block;width:100%;height:100%;object-fit:contain;user-select:none;-webkit-user-drag:none;-webkit-touch-callout:none}
+.slide img{display:block;width:100%;height:100%;object-fit:contain;user-select:none;-webkit-user-drag:none;-webkit-touch-callout:none;pointer-events:none}
 #dots{position:absolute;z-index:4;left:0;right:0;bottom:7px;display:flex;justify-content:center;gap:6px;pointer-events:none}
-.dot{width:7px;height:7px;border-radius:8px;background:rgba(70,70,70,.35);border:1px solid rgba(255,255,255,.8)}
+.dot{width:7px;height:7px;border-radius:8px;background:rgba(70,70,70,.35);border:1px solid rgba(255,255,255,.8);transition:all .2s}
 .dot.active{width:18px;background:#c72c61}
 #message{display:none;position:absolute;z-index:3;inset:0;align-items:center;justify-content:center;text-align:center;padding:12px;color:#666;font-size:13px}
 </style>
 </head>
 <body>
 <div id="carousel" aria-label="بنرهای سعادت">
-  <div id="message">در حال بارگذاری بنر…</div>
+  <div id="message">در حال بارگذاری بنر...</div>
   <div id="dots"><span class="dot active"></span><span class="dot"></span><span class="dot"></span></div>
 </div>
 <script>
@@ -30,10 +30,14 @@ html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden;background:t
     'https://cdn.jsdelivr.net/gh/sampixel1-ctrl/saadat-news@main/banners/banner2.webp',
     'https://cdn.jsdelivr.net/gh/sampixel1-ctrl/saadat-news@main/banners/banner3.webp'
   ];
+  var INTERVAL = 5000;     // زمان تعویض خودکار (میلی‌ثانیه)
+  var SWIPE_MIN = 40;      // حداقل مسافت کشیدن (پیکسل)
+
   var root=document.getElementById('carousel');
   var dots=Array.prototype.slice.call(document.querySelectorAll('.dot'));
   var message=document.getElementById('message');
-  var slides=[], images=[], loaded=[false,false,false], current=0, rotation=null, touchStartX=0;
+  var slides=[], images=[], loaded=[], current=0, rotation=null;
+  var startX=0, startY=0, tracking=false, handled=false;
 
   function loadImage(i){
     if(loaded[i])return;
@@ -47,11 +51,11 @@ html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden;background:t
     loadImage(current);
     loadImage((current+1)%slides.length);
   }
+  function stopTimer(){if(rotation){clearInterval(rotation);rotation=null;}}
   function startTimer(){
     stopTimer();
-    rotation=setInterval(function(){show(current+1);},5000);
+    rotation=setInterval(function(){show(current+1);},INTERVAL);
   }
-  function stopTimer(){if(rotation){clearInterval(rotation);rotation=null;}}
 
   imageUrls.forEach(function(url,index){
     var slide=document.createElement('div');
@@ -61,18 +65,62 @@ html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden;background:t
     img.draggable=false;
     img.decoding='async';
     img.onload=function(){if(index===current)message.style.display='none';};
-    img.onerror=function(){if(index===current)message.textContent='بارگذاری بنر انجام نشد؛ اتصال اینترنت را بررسی کنید.';};
+    img.onerror=function(){if(index===current){message.style.display='flex';message.textContent='بارگذاری بنر انجام نشد؛ اتصال اینترنت را بررسی کنید.';}};
     slide.appendChild(img);
     root.insertBefore(slide,document.getElementById('dots'));
-    slides.push(slide); images.push(img);
+    slides.push(slide); images.push(img); loaded.push(false);
   });
 
-  // تغییر بنر با کشیدن انگشت به چپ یا راست؛ بدون فلش روی تصویر
-  root.addEventListener('touchstart',function(e){touchStartX=e.changedTouches[0].clientX;},{passive:true});
-  root.addEventListener('touchend',function(e){
-    var dx=e.changedTouches[0].clientX-touchStartX;
-    if(Math.abs(dx)>40){show(current+(dx<0?1:-1));}
-  },{passive:true});
+  // ---------- شروع لمس: تایمر متوقف می‌شود ----------
+  function onDown(x,y){
+    tracking=true; handled=false;
+    startX=x; startY=y;
+    stopTimer();
+  }
+  // ---------- حرکت: اگر کشیدن افقی کافی بود، بنر عوض می‌شود ----------
+  function onMove(x,y){
+    if(!tracking||handled)return;
+    var dx=x-startX, dy=y-startY;
+    if(Math.abs(dx)>SWIPE_MIN && Math.abs(dx)>Math.abs(dy)){
+      handled=true;
+      // کشیدن به چپ => بنر بعدی ، کشیدن به راست => بنر قبلی
+      show(current+(dx<0?1:-1));
+    }
+  }
+  // ---------- پایان لمس: تایمر دوباره شروع می‌شود ----------
+  function onUp(){
+    if(!tracking)return;
+    tracking=false;
+    startTimer();
+  }
+
+  if(window.PointerEvent){
+    root.addEventListener('pointerdown',function(e){
+      onDown(e.clientX,e.clientY);
+      try{root.setPointerCapture(e.pointerId);}catch(_){}
+    });
+    root.addEventListener('pointermove',function(e){onMove(e.clientX,e.clientY);});
+    root.addEventListener('pointerup',onUp);
+    root.addEventListener('pointercancel',onUp);
+    root.addEventListener('lostpointercapture',onUp);
+  }else{
+    // fallback برای WebViewهای قدیمی
+    root.addEventListener('touchstart',function(e){var t=e.changedTouches[0];onDown(t.clientX,t.clientY);},{passive:true});
+    root.addEventListener('touchmove',function(e){var t=e.changedTouches[0];onMove(t.clientX,t.clientY);},{passive:true});
+    root.addEventListener('touchend',onUp,{passive:true});
+    root.addEventListener('touchcancel',onUp,{passive:true});
+    root.addEventListener('mousedown',function(e){onDown(e.clientX,e.clientY);});
+    window.addEventListener('mousemove',function(e){onMove(e.clientX,e.clientY);});
+    window.addEventListener('mouseup',onUp);
+  }
+
+  // جلوگیری از منوی نگه‌داشتن (long press) روی تصویر
+  root.addEventListener('contextmenu',function(e){e.preventDefault();});
+
+  // وقتی صفحه مخفی شد تایمر متوقف، وقتی برگشت دوباره شروع شود
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){stopTimer();}else if(!tracking){startTimer();}
+  });
 
   loadImage(0);
   loadImage(1);
