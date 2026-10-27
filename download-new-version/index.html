@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>دانلود اپلیکیشن بازرگانی سعادت نسخه 3.0</title>
+<meta name="description" content="دانلود نسخه 3.0 اپلیکیشن اختصاصی بازرگانی سعادت برای اندروید">
+<meta name="theme-color" content="#c2185b">
+<link rel="icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fdf3f7; --card:#ffffff; --text:#3b3b45; --muted:#7a7a86;
+  --accent:#ec5b9c; --accent2:#c2185b; --gold:#f48fb1; --line:#f4dce6;
+  --shadow:0 20px 50px rgba(194,24,91,.15);
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#1d1c22; --card:#2a292f; --text:#f6eff3; --muted:#b0aab1; --line:#3f3d45; --shadow:0 20px 50px rgba(0,0,0,.5); }
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Vazirmatn',Tahoma,'Segoe UI',sans-serif;
+  background:var(--bg); color:var(--text); min-height:100vh;
+  display:flex; flex-direction:column; align-items:center;
+  padding:24px 16px; position:relative; overflow-x:hidden;
+}
+body::before,body::after{
+  content:""; position:fixed; border-radius:50%; filter:blur(90px); opacity:.35; z-index:-1;
+}
+body::before{width:340px;height:340px;background:var(--accent);top:-80px;right:-80px}
+body::after{width:300px;height:300px;background:var(--gold);bottom:-80px;left:-80px;opacity:.25}
+
+.card{
+  width:100%; max-width:460px; background:var(--card); border:1px solid var(--line);
+  border-radius:28px; box-shadow:var(--shadow); padding:32px 24px; text-align:center;
+  animation:rise .7s ease both;
+}
+@keyframes rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+
+.brand{font-size:.95rem;color:var(--muted);letter-spacing:.5px;margin-bottom:18px}
+.logo{
+  width:112px;height:112px;border-radius:28px;object-fit:contain;background:#fff;padding:10px;
+  box-shadow:0 10px 30px rgba(236,91,156,.35); margin:0 auto 18px; display:block;
+  animation:float 4s ease-in-out infinite;
+}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+h1{font-size:1.5rem;font-weight:800;margin-bottom:8px}
+.badge{
+  display:inline-block;background:linear-gradient(135deg,var(--gold),#f8bbd0);color:#5a0f2e;
+  font-weight:800;font-size:.85rem;padding:4px 14px;border-radius:999px;margin-bottom:14px;
+}
+.lead{color:var(--muted);line-height:1.9;font-size:.98rem;margin-bottom:22px}
+
+.btn{
+  display:flex;align-items:center;justify-content:center;gap:10px;width:100%;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;text-decoration:none;
+  font-weight:800;font-size:1.1rem;padding:16px;border-radius:16px;
+  box-shadow:0 10px 24px rgba(236,91,156,.4); transition:transform .2s, box-shadow .2s;
+  position:relative; overflow:hidden;
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(236,91,156,.5)}
+.btn:active{transform:scale(.98)}
+.btn:focus-visible{outline:3px solid var(--accent2);outline-offset:3px}
+.btn svg{width:22px;height:22px;flex:none}
+.btn::after{
+  content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.35),transparent);
+  transform:skewX(-20deg);animation:shine 3.2s infinite;
+}
+@keyframes shine{0%{left:-60%}60%,100%{left:130%}}
+
+.meta{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:22px 0}
+.meta div{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:12px 6px}
+.meta b{display:block;font-size:1.05rem;margin-bottom:2px}
+.meta span{font-size:.78rem;color:var(--muted)}
+
+.log{text-align:right;background:var(--bg);border:1px solid var(--line);border-radius:18px;padding:16px 18px;margin-top:4px}
+.log h2{font-size:1rem;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.log ul{list-style:none}
+.log li{position:relative;padding:6px 26px 6px 0;color:var(--muted);font-size:.92rem;line-height:1.7}
+.log li::before{content:"✓";position:absolute;right:0;top:6px;color:var(--accent);font-weight:800}
+
+.steps{margin-top:18px;text-align:right;font-size:.88rem;color:var(--muted);line-height:1.9}
+.steps summary{cursor:pointer;font-weight:600;color:var(--text)}
+.steps ol{padding-right:20px;margin-top:6px}
+
+footer{margin-top:22px;font-size:.8rem;color:var(--muted);text-align:center;line-height:1.8}
+
+.guide{margin-top:12px;text-align:right}
+.guide>h2{font-size:1.05rem;margin-bottom:6px}
+.guide>p.sub{color:var(--muted);font-size:.88rem;line-height:1.8;margin-bottom:14px}
+.step{background:var(--bg);border:1px solid var(--line);border-radius:18px;padding:16px;margin-bottom:14px}
+.step h3{font-size:.98rem;display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.step h3 i{flex:none;width:28px;height:28px;border-radius:50%;background:var(--accent2);color:#fff;font-style:normal;font-weight:800;display:grid;place-items:center;font-size:.9rem}
+.step p{color:var(--muted);font-size:.9rem;line-height:1.9}
+.step p b{color:var(--text)}
+.shot{position:relative;width:78%;max-width:300px;margin:12px auto 0;border-radius:16px;overflow:hidden;border:2px solid var(--line)}
+.shot img{display:block;width:100%;height:auto}
+.hl{position:absolute;border:3px solid #e53935;border-radius:12px;box-shadow:0 0 0 4px rgba(229,57,53,.25);animation:pulse 1.6s ease-in-out infinite}
+.hl em{position:absolute;top:-30px;right:50%;transform:translateX(50%);background:#e53935;color:#fff;font-style:normal;font-weight:800;font-size:.72rem;padding:2px 10px;border-radius:8px;white-space:nowrap}
+.hl em::after{content:"";position:absolute;bottom:-5px;left:50%;margin-left:-5px;border:5px solid transparent;border-bottom:0;border-top-color:#e53935}
+.hl.green{border-color:#2e7d32;box-shadow:0 0 0 4px rgba(46,125,50,.25)}
+.hl.green em{background:#2e7d32}.hl.green em::after{border-top-color:#2e7d32}
+@keyframes pulse{50%{box-shadow:0 0 0 9px rgba(229,57,53,.05)}}
+@media (prefers-reduced-motion:reduce){.hl,.logo,.btn::after{animation:none}}
+.warn{margin-top:10px;background:#fff3e0;color:#7a4300;border-radius:12px;padding:10px 12px;font-size:.85rem;line-height:1.8}
+@media (prefers-color-scheme: dark){.warn{background:#3a2a14;color:#ffd9a3}}
+.why{margin-top:14px;font-size:.84rem;color:var(--muted);line-height:1.9;text-align:right}
+</style>
+</head>
+<body>
+<main class="card">
+  <p class="brand">بازرگانی سعادت</p>
+  <img class="logo" src="logo.png" alt="لوگوی بازرگانی سعادت" width="112" height="112">
+  <span class="badge">نسخه 3.0</span>
+  <h1>دانلود اپلیکیشن سعادت</h1>
+  <p class="lead">نسخه جدید اپلیکیشن اختصاصی بازرگانی سعادت با عملکرد بهتر و پایدارتر منتشر شد. همین حالا دانلود کنید.</p>
+
+  <a class="btn" href="https://github.com/sampixel1-ctrl/saadat-news/releases/download/v3.0/saadat.apk" download>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 20h16"/></svg>
+    دانلود نسخه 3.0
+  </a>
+
+  <div class="meta">
+    <div><b>3.0</b><span>نسخه</span></div>
+    <div><b>اندروید</b><span>سیستم‌عامل</span></div>
+    <div><b>14 MB</b><span>حجم فایل</span></div>
+  </div>
+
+  <section class="log" aria-label="تغییرات نسخه 3.0">
+    <h2>✨ تغییرات نسخه 3.0</h2>
+    <ul>
+      <li>رفع باگ‌های نسخه‌های قبلی</li>
+      <li>بهبود پایداری و عملکرد برنامه</li>
+      <li>سرعت بالاتر در اجرا و بارگذاری</li>
+    </ul>
+  </section>
+
+  <details class="steps">
+    <summary>📲 آموزش تصویری نصب (برای باز شدن لمس کنید)</summary>
+  <section class="guide" aria-label="آموزش تصویری نصب">
+    <p class="sub">هنگام نصب، گوگل پیامی نشان می‌دهد. این پیام برای همه اپ‌هایی است که از فروشگاه گوگل نصب نمی‌شوند و <b>خطری ندارد</b>. مراحل زیر را دنبال کنید.</p>
+
+    <div class="step">
+      <h3><i>1</i> دانلود و باز کردن فایل</h3>
+      <p>روی دکمه «دانلود نسخه 3.0» بزنید. بعد از اتمام دانلود، فایل <b>saadat.apk</b> را باز کنید. اگر گوشی پرسید، گزینه <b>Settings</b> را بزنید و <b>Allow from this source</b> (اجازه نصب از این منبع) را روشن کنید، سپس برگردید.</p>
+    </div>
+
+    <div class="step">
+      <h3><i>2</i> پیام Play Protect</h3>
+      <p>صفحه‌ای با عنوان <b>App scan recommended</b> باز می‌شود. دو دکمه بزرگ آبی (Scan app و Don't install app) را <b>نزنید</b>. گزینه درست، متن کوچک بالای دکمه‌هاست:</p>
+      <div class="shot">
+        <img src="guide-scan.jpg" alt="صفحه Play Protect؛ گزینه Install without scanning را بزنید" loading="lazy" width="520" height="816">
+        <span class="hl" style="top:64.5%;right:24%;width:52%;height:5.5%"><em>این را بزنید</em></span>
+      </div>
+      <p style="margin-top:10px">روی <b>Install without scanning</b> (نصب بدون اسکن) بزنید.</p>
+      <div class="warn">⚠️ اگر دکمه <b>Don't install app</b> را بزنید نصب لغو می‌شود. در این صورت دوباره فایل را باز کنید.</div>
+    </div>
+
+    <div class="step">
+      <h3><i>3</i> صبر تا پایان نصب</h3>
+      <p>نوار <b>Installing…</b> پر می‌شود. چند ثانیه صبر کنید و دکمه Cancel را نزنید.</p>
+      <div class="shot">
+        <img src="guide-install.jpg" alt="نوار پیشرفت نصب برنامه سعادت" loading="lazy" width="512" height="267">
+      </div>
+    </div>
+
+    <div class="step">
+      <h3><i>4</i> باز کردن برنامه</h3>
+      <p>پس از پایان نصب، دکمه <b>Open</b> را بزنید یا آیکون قرمز «سعادت» را از صفحه گوشی باز کنید. تمام است ✅</p>
+    </div>
+
+    <p class="why">اگر پیام مشابهی با دکمه‌های <b>More details</b> یا <b>Install anyway</b> دیدید، همان <b>Install anyway</b> را بزنید.</p>
+  </section>
+
+  </details>
+
+</main>
+
+<footer>
+  SAADAT APP Version 3.0<br>
+  © 2026 SAADAT Trading Group
+</footer>
+</body>
+</html>
