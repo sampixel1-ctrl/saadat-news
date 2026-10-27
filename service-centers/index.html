@@ -2,9 +2,16 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
 <title>نمایندگان خدمات</title>
 <style>
+*{
+-webkit-tap-highlight-color:transparent;
+}
+html,body{
+touch-action:pan-x pan-y;
+-webkit-text-size-adjust:100%;
+}
 body{
 margin:0;
 background:#f4f4f8;
@@ -44,6 +51,7 @@ border-radius:18px;
 padding:18px 8px;
 font-size:16px;
 font-weight:bold;
+font-family:tahoma;
 box-shadow:0 5px 15px #0002;
 }
 .active{
@@ -157,6 +165,20 @@ ${r.brands.map(b=>`<span class="brand">${b}</span>`).join("")}
 </div>
 `).join("");
 }
+</script>
+
+<!-- جلوگیری کامل از زوم -->
+<script>
+document.addEventListener('gesturestart',function(e){e.preventDefault();});
+document.addEventListener('touchmove',function(e){
+  if(e.touches.length>1)e.preventDefault();
+},{passive:false});
+var lastTouch=0;
+document.addEventListener('touchend',function(e){
+  var now=Date.now();
+  if(now-lastTouch<=300)e.preventDefault();
+  lastTouch=now;
+},false);
 </script>
 
 </body>
