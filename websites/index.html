@@ -2,9 +2,11 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
 <title>وب سایت شرکت ها</title>
 <style>
+*{-webkit-tap-highlight-color:transparent}
+html,body{touch-action:pan-x pan-y;-webkit-text-size-adjust:100%}
 body{margin:0;padding:15px;background:#f4f5f8;font-family:tahoma;direction:rtl}
 .header{background:#c90055;color:white;padding:22px;text-align:center;border-radius:0 0 25px 25px;font-size:22px;font-weight:bold;margin:-15px -15px 20px}
 .card{background:rgba(255,255,255,.65);backdrop-filter:blur(12px);border:1.5px solid #e6006d;border-radius:22px;padding:20px;margin-bottom:15px;text-align:center;box-shadow:0 8px 20px #0002}
@@ -26,5 +28,14 @@ document.getElementById("list").innerHTML=d.companies.map(c=>`
 </div>`).join("");
 });
 </script>
+
+<!-- جلوگیری از زوم با دو انگشت -->
+<script>
+document.addEventListener('gesturestart',function(e){e.preventDefault();});
+document.addEventListener('touchmove',function(e){
+  if(e.touches.length>1)e.preventDefault();
+},{passive:false});
+</script>
+
 </body>
 </html>
