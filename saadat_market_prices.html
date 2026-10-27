@@ -8,587 +8,298 @@
 
 <title>قیمت لحظه‌ای بازار</title>
 
-
 <style>
 
 *{
 box-sizing:border-box;
+-webkit-tap-highlight-color:transparent;
 }
-
 
 html{
 background:transparent !important;
 }
 
 body{
-
 margin:0;
 padding:12px;
-
 background:transparent !important;
-
 font-family:Tahoma,Arial,sans-serif;
-
 direction:rtl;
-
 }
-
-
 
 /* شبکه کارت ها */
-
 .grid{
-
 display:grid;
-
 grid-template-columns:repeat(2,minmax(0,1fr));
-
 gap:12px;
-
 width:100%;
-
 max-width:600px;
-
 margin:auto;
-
 }
 
-
-
-
-
-/* کارت شیشه ای */
-
+/* کارت */
 .card{
-
 position:relative;
-
 width:100%;
-
 aspect-ratio:1092 / 360;
-
-
-background:rgba(255,255,255,0.55);
-
-
-backdrop-filter:blur(12px);
-
-
--webkit-backdrop-filter:blur(12px);
-
-
-border-radius:22px;
-
-
-border:1.5px solid #e6006d;
-
-
-box-shadow:
-
-0 8px 25px rgba(230,0,109,0.15);
-
-
+min-height:78px;
+border-radius:20px;
 overflow:hidden;
-
+color:#fff;
+background:linear-gradient(135deg,#2b1055 0%,#5b1a7a 55%,#c72c61 100%);
+box-shadow:0 8px 20px rgba(91,26,122,.35), inset 0 1px 0 rgba(255,255,255,.25);
+border:1px solid rgba(255,255,255,.18);
 }
 
+/* رنگ‌های متفاوت برای هر کارت */
+.card.c-usd{background:linear-gradient(135deg,#0f2027 0%,#1d4e5f 55%,#2c9a8a 100%);box-shadow:0 8px 20px rgba(29,78,95,.35), inset 0 1px 0 rgba(255,255,255,.25);}
+.card.c-eur{background:linear-gradient(135deg,#1a237e 0%,#3949ab 55%,#5c6bc0 100%);box-shadow:0 8px 20px rgba(57,73,171,.35), inset 0 1px 0 rgba(255,255,255,.25);}
+.card.c-coin{background:linear-gradient(135deg,#5d4000 0%,#b8860b 55%,#f0c24b 100%);box-shadow:0 8px 20px rgba(184,134,11,.4), inset 0 1px 0 rgba(255,255,255,.3);}
+.card.c-gold{background:linear-gradient(135deg,#7a3e00 0%,#d2831c 55%,#ffcf6b 100%);box-shadow:0 8px 20px rgba(210,131,28,.4), inset 0 1px 0 rgba(255,255,255,.3);}
 
+/* دایره‌های تزئینی */
+.card::before{
+content:"";
+position:absolute;
+width:90px;height:90px;
+border-radius:50%;
+background:rgba(255,255,255,.12);
+left:-25px;top:-30px;
+}
+.card::after{
+content:"";
+position:absolute;
+width:60px;height:60px;
+border-radius:50%;
+background:rgba(255,255,255,.08);
+left:30px;bottom:-30px;
+}
 
+/* نوار رنگی سمت راست */
+.bar{
+position:absolute;
+top:14%;
+bottom:14%;
+right:0;
+width:5px;
+border-radius:5px 0 0 5px;
+background:rgba(255,255,255,.85);
+}
 
+/* آیکون */
+.icon{
+position:absolute;
+top:50%;
+right:10px;
+transform:translateY(-50%);
+width:clamp(28px,8vw,40px);
+height:clamp(28px,8vw,40px);
+border-radius:50%;
+background:rgba(255,255,255,.2);
+border:1px solid rgba(255,255,255,.35);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:clamp(14px,4vw,20px);
+font-weight:bold;
+z-index:2;
+}
 
 /* محتویات */
-
 .info{
-
 position:absolute;
-
 top:50%;
-
-right:8%;
-
-left:8%;
-
-
+right:calc(clamp(28px,8vw,40px) + 18px);
+left:8px;
 transform:translateY(-50%);
-
-
 text-align:center;
-
+z-index:2;
 }
-
-
-
-
 
 /* نام ارز */
-
 .name{
-
-font-size:clamp(14px,3vw,20px);
-
-
+font-size:clamp(11px,3vw,16px);
 font-weight:bold;
-
-
-color:#222;
-
-
+color:rgba(255,255,255,.9);
 margin-bottom:5px;
-
-
 white-space:nowrap;
-
+overflow:hidden;
+text-overflow:ellipsis;
 }
-
-
-
-
 
 /* قیمت */
-
 .price{
-
-
-font-size:clamp(15px,4vw,22px);
-
-
+display:inline-block;
+font-size:clamp(12px,3.6vw,19px);
 font-weight:bold;
-
-
-color:#222;
-
-
+color:#fff;
 white-space:nowrap;
-
-
+padding:3px 10px;
+border-radius:10px;
+background:rgba(0,0,0,.22);
+transition:color .3s, background .3s;
 }
-
-
-
-
 
 /* افزایش */
-
 .up{
-
-color:#079447 !important;
-
+color:#7dffb0 !important;
+background:rgba(0,80,30,.35) !important;
 }
-
-
-
-
 
 /* کاهش */
-
 .down{
-
-color:#e32636 !important;
-
+color:#ffb3ba !important;
+background:rgba(120,0,15,.4) !important;
 }
-
-
-
-
 
 @media(max-width:350px){
-
-
-body{
-
-padding:7px;
-
+body{padding:7px;}
+.grid{gap:8px;}
+.name{font-size:10px;}
+.price{font-size:11px;padding:2px 6px;}
 }
-
-
-.grid{
-
-gap:8px;
-
-}
-
-
-.name{
-
-font-size:10px;
-
-}
-
-
-.price{
-
-font-size:11px;
-
-}
-
-
-}
-
 
 </style>
 
-
 </head>
-
-
 
 <body>
 
-
-
 <div class="grid">
 
-
-
 <!-- دلار -->
-
-<div class="card">
-
+<div class="card c-usd">
+<div class="bar"></div>
+<div class="icon">$</div>
 <div class="info">
-
-<div class="name">
-دلار آمریکا
+<div class="name">دلار آمریکا</div>
+<div class="price" id="usd">در حال دریافت...</div>
 </div>
-
-<div class="price" id="usd">
-در حال دریافت...
 </div>
-
-</div>
-
-</div>
-
-
-
-
 
 <!-- یورو -->
-
-
-<div class="card">
-
+<div class="card c-eur">
+<div class="bar"></div>
+<div class="icon">€</div>
 <div class="info">
-
-<div class="name">
-یورو
+<div class="name">یورو</div>
+<div class="price" id="eur">در حال دریافت...</div>
 </div>
-
-
-<div class="price" id="eur">
-در حال دریافت...
 </div>
-
-
-</div>
-
-</div>
-
-
-
-
-
 
 <!-- سکه -->
-
-
-<div class="card">
-
+<div class="card c-coin">
+<div class="bar"></div>
+<div class="icon">●</div>
 <div class="info">
-
-<div class="name">
-سکه تمام طرح جدید
+<div class="name">سکه تمام طرح جدید</div>
+<div class="price" id="coin">در حال دریافت...</div>
 </div>
-
-
-<div class="price" id="coin">
-در حال دریافت...
 </div>
-
-
-</div>
-
-</div>
-
-
-
-
-
-
 
 <!-- طلا -->
-
-
-<div class="card">
-
+<div class="card c-gold">
+<div class="bar"></div>
+<div class="icon">Au</div>
 <div class="info">
-
-<div class="name">
-طلای ۱۸ عیار
+<div class="name">طلای ۱۸ عیار</div>
+<div class="price" id="gold18">در حال دریافت...</div>
 </div>
-
-
-<div class="price" id="gold18">
-در حال دریافت...
-</div>
-
-
 </div>
 
 </div>
-
-
-
-
-</div>
-
-
-
-
-
 
 <script>
 
-
-
 const API =
-
 "https://api.tgju.org/v1/widget/tmp?keys=price_dollar_rl,price_eur,sekee,geram18";
 
-
-
-
 const items={
-
-
 price_dollar_rl:"usd",
-
-
 price_eur:"eur",
-
-
 sekee:"coin",
-
-
 geram18:"gold18"
-
-
 };
-
-
-
-
 
 const previousPrices={};
 
-
-
-
-
 function formatPrice(value){
-
-
 return Math.round(value)
-
 .toLocaleString("en-US")
-
 +" تومان";
-
-
 }
-
-
-
-
-
-
 
 async function updatePrices(){
 
-
-
 try{
 
-
 const response = await fetch(API,{
-
 cache:"no-store"
-
 });
 
-
-
 if(!response.ok){
-
 throw new Error();
-
 }
-
-
 
 const data = await response.json();
 
-
 const indicators=data.response.indicators;
-
-
-
-
 
 for(const item of indicators){
 
-
-
 const elementId=items[item.name];
 
-
-
 if(!elementId || item.p==null)
-
 continue;
-
-
-
-
 
 const rawPrice=Number(
-
 String(item.p).replace(/,/g,"")
-
 );
 
-
-
-
 if(!Number.isFinite(rawPrice))
-
 continue;
 
-
-
-
-
 // تبدیل ریال به تومان
-
 const price=rawPrice/10;
-
-
-
-
 
 const element=document.getElementById(elementId);
 
-
-
-
 element.textContent=formatPrice(price);
 
-
-
-
-
-element.classList.remove(
-
-"up",
-
-"down"
-
-);
-
-
-
-
-
-
+element.classList.remove("up","down");
 
 // بررسی افزایش یا کاهش قیمت
-
-
-
 if(previousPrices[item.name] !== undefined){
 
-
-
 if(price > previousPrices[item.name]){
-
-
 element.classList.add("up");
-
-
 }
-
-
-
 else if(price < previousPrices[item.name]){
-
-
 element.classList.add("down");
-
-
 }
 
-
-
 }
-
-
-
-
-
 
 previousPrices[item.name]=price;
 
-
-
 }
 
-
-
 }
-
 catch(error){
-
-
 console.log("خطا در دریافت قیمت");
-
-
 }
 
-
-
 }
-
-
-
-
-
 
 // اجرای اولیه
-
 updatePrices();
-
-
-
-
-
 
 // بروزرسانی هر ۶۰ ثانیه
-
-
 setInterval(()=>{
-
-
 updatePrices();
-
-
 },60000);
-
-
-
-
 
 </script>
 
-
 </body>
-
 </html>
