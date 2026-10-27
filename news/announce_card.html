@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>اطلاعیه</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0;background:transparent;font-family:Tahoma,Arial,sans-serif;color:#3b3b45}
+body{padding:10px 12px}
+.item{padding:2px 0 10px;margin-bottom:10px;border-bottom:1px dashed #f4dce6}
+.item:last-child{border-bottom:0;margin-bottom:0}
+.head{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px}
+.head h2{margin:0;font-size:1rem;color:#c2185b}
+.head time{font-size:.78rem;color:#7a7a86;background:#fdf3f7;border:1px solid #f4dce6;padding:2px 10px;border-radius:999px;white-space:nowrap}
+.item p{margin:0;line-height:1.9;font-size:.93rem;white-space:pre-line}
+#state{text-align:center;padding:14px 8px;color:#7a7a86;line-height:2}
+#retry{display:none;margin:4px auto 0;border:0;background:linear-gradient(135deg,#ec5b9c,#c2185b);color:#fff;font:inherit;font-weight:bold;padding:8px 22px;border-radius:12px}
+@media (prefers-color-scheme: dark){
+  html,body{color:#f6eff3}
+  .item{border-bottom-color:#3f3d45}
+  .head h2{color:#f48fb1}
+  .head time{background:#1d1c22;border-color:#3f3d45;color:#b0aab1}
+  #state{color:#b0aab1}
+}
+</style>
+</head>
+<body>
+<div id="list"></div>
+<div id="state">در حال دریافت اطلاعیه...</div>
+<button id="retry" type="button">تلاش دوباره</button>
+<script>
+(function(){
+  var FILE = 'announcements.json';
+  var BASES = [
+    'https://sampixel1-ctrl.github.io/saadat-news/',
+    'https://cdn.jsdelivr.net/gh/sampixel1-ctrl/saadat-news@main/',
+    'https://raw.githubusercontent.com/sampixel1-ctrl/saadat-news/main/'
+  ];
+  var TIMEOUT = 8000;
+  var list=document.getElementById('list');
+  var state=document.getElementById('state');
+  var retry=document.getElementById('retry');
+
+  function fail(){
+    list.innerHTML='';
+    state.style.display='block';
+    state.textContent='اینترنت در دسترس نیست';
+    retry.style.display='block';
+  }
+  function pick(o,keys){
+    for(var i=0;i<keys.length;i++){ if(o[keys[i]]!=null && o[keys[i]]!=='') return String(o[keys[i]]); }
+    return '';
+  }
+  function render(data){
+    var items=data;
+    if(!Array.isArray(items)){
+      items=data.items||data.announcements||data.list||data.data;
+      if(!Array.isArray(items)) items=[data];
+    }
+    list.innerHTML='';
+    items.forEach(function(it){
+      var box=document.createElement('div'); box.className='item';
+      if(typeof it==='string'){
+        var p0=document.createElement('p'); p0.textContent=it; box.appendChild(p0);
+      }else{
+        var t=pick(it,['title','عنوان']), m=pick(it,['message','text','body','متن']), d=pick(it,['date','تاریخ']);
+        if(t||d){
+          var head=document.createElement('div'); head.className='head';
+          var h=document.createElement('h2'); h.textContent=t; head.appendChild(h);
+          if(d){var tm=document.createElement('time'); tm.textContent=d; head.appendChild(tm);}
+          box.appendChild(head);
+        }
+        if(m){var p=document.createElement('p'); p.textContent=m; box.appendChild(p);}
+      }
+      list.appendChild(box);
+    });
+    state.style.display='none';
+    retry.style.display='none';
+  }
+  function attempt(k){
+    if(k>=BASES.length){fail();return;}
+    var done=false;
+    var ctrl=window.AbortController?new AbortController():null;
+    var timer=setTimeout(function(){
+      if(done)return; done=true; if(ctrl)ctrl.abort(); attempt(k+1);
+    },TIMEOUT);
+    fetch(BASES[k]+FILE+'?t='+Date.now(),{cache:'no-store',signal:ctrl?ctrl.signal:undefined})
+      .then(function(r){ if(!r.ok) throw new Error('http'); return r.json(); })
+      .then(function(data){ if(done)return; done=true; clearTimeout(timer); render(data); })
+      .catch(function(){ if(done)return; done=true; clearTimeout(timer); attempt(k+1); });
+  }
+  function load(){
+    retry.style.display='none';
+    state.style.display='block';
+    state.textContent='در حال دریافت اطلاعیه...';
+    attempt(0);
+  }
+  retry.addEventListener('click',load);
+  window.addEventListener('online',load);
+  load();
+})();
+</script>
+</body>
+</html>
