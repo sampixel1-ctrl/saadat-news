@@ -1,16 +1,94 @@
 {
   "companies": [
     {
+      "name": "یونیک",
+      "logo": "",
+      "url": "https://uniqueco.co.uk/",
+      "description": "وب سایت رسمی یونیک"
+    },
+    {
+      "name": "ام جی اس",
+      "logo": "",
+      "url": "https://iranmgs.com/",
+      "description": "وب سایت رسمی ام جی اس"
+    },
+    {
+      "name": "لاوان",
+      "logo": "",
+      "url": "https://lavankitchen.com/",
+      "description": "وب سایت رسمی لاوان"
+    },
+    {
+      "name": "راکلند",
+      "logo": "",
+      "url": "https://rocklandiran.com/",
+      "description": "وب سایت رسمی راکلند"
+    },
+    {
       "name": "دلمونتی",
       "logo": "",
-      "url": "https://example.com",
+      "url": "https://delmonti.ir/",
       "description": "وب سایت رسمی دلمونتی"
     },
     {
-      "name": "شرکت دوم",
+      "name": "کاستلو",
       "logo": "",
-      "url": "https://example.com",
-      "description": "وب سایت رسمی شرکت"
+      "url": "https://www.castello.ir/fa",
+      "description": "وب سایت رسمی کاستلو"
+    },
+    {
+      "name": "بلانزو",
+      "logo": "",
+      "url": "https://bellanzo-home.ir/",
+      "description": "وب سایت رسمی بلانزو"
+    },
+    {
+      "name": "ام آر اس",
+      "logo": "",
+      "url": "https://mrs.company/",
+      "description": "وب سایت رسمی ام آر اس"
+    },
+    {
+      "name": "ساپر",
+      "logo": "",
+      "url": "https://sapor.ir/",
+      "description": "وب سایت رسمی ساپر"
+    },
+    {
+      "name": "میگل",
+      "logo": "",
+      "url": "https://migel.com/",
+      "description": "وب سایت رسمی میگل"
+    },
+    {
+      "name": "ژانومه",
+      "logo": "",
+      "url": "https://jantech.co/",
+      "description": "وب سایت رسمی ژانومه"
+    },
+    {
+      "name": "جانتک",
+      "logo": "",
+      "url": "https://jantech.co/",
+      "description": "وب سایت رسمی جانتک"
+    },
+    {
+      "name": "بیم خانه بهتر",
+      "logo": "",
+      "url": "https://beemhome.ir/",
+      "description": "وب سایت رسمی بیم خانه بهتر"
+    },
+    {
+      "name": "هونیرا",
+      "logo": "",
+      "url": "https://newsadap.com/",
+      "description": "وب سایت رسمی هونیرا"
+    },
+    {
+      "name": "سیماران",
+      "logo": "",
+      "url": "https://simaran.com/",
+      "description": "وب سایت رسمی سیماران"
     }
   ]
 }
