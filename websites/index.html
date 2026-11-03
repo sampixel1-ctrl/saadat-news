@@ -18,23 +18,40 @@ body{margin:0;padding:15px;background:#f4f5f8;font-family:tahoma;direction:rtl}
 <body>
 <div class="header">وب سایت شرکت ها</div>
 <div id="list"></div>
+
 <script>
-fetch("websites.json?v="+Date.now()).then(r=>r.json()).then(d=>{
-document.getElementById("list").innerHTML=d.companies.map(c=>`
-<div class="card">
-<div class="name">${c.name}</div>
-<div class="desc">${c.description}</div>
-<a class="btn" href="${c.url}" target="_blank">ورود به سایت</a>
-</div>`).join("");
-});
+var list = document.getElementById("list");
+
+fetch("websites.json?v=" + Date.now())
+  .then(function (r) {
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    return r.json();
+  })
+  .then(function (d) {
+    var items = (d && d.companies) ? d.companies : [];
+    if (items.length === 0) {
+      list.innerHTML = '<div class="card">موردی برای نمایش وجود ندارد.</div>';
+      return;
+    }
+    list.innerHTML = items.map(function (c) {
+      return '<div class="card">' +
+        '<div class="name">' + (c.name || '') + '</div>' +
+        '<div class="desc">' + (c.description || '') + '</div>' +
+        '<a class="btn" href="' + (c.url || '#') + '" target="_blank">ورود به سایت</a>' +
+        '</div>';
+    }).join("");
+  })
+  .catch(function () {
+    list.innerHTML = '<div class="card">خطا در دریافت اطلاعات. لطفاً اینترنت خود را بررسی کنید و دوباره تلاش کنید.</div>';
+  });
 </script>
 
 <!-- جلوگیری از زوم با دو انگشت -->
 <script>
-document.addEventListener('gesturestart',function(e){e.preventDefault();});
-document.addEventListener('touchmove',function(e){
-  if(e.touches.length>1)e.preventDefault();
-},{passive:false});
+document.addEventListener('gesturestart', function (e) { e.preventDefault(); });
+document.addEventListener('touchmove', function (e) {
+  if (e.touches.length > 1) e.preventDefault();
+}, { passive: false });
 </script>
 
 </body>
