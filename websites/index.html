@@ -37,7 +37,7 @@ fetch("websites.json?v=" + Date.now())
       return '<div class="card">' +
         '<div class="name">' + (c.name || '') + '</div>' +
         '<div class="desc">' + (c.description || '') + '</div>' +
-        '<a class="btn" href="' + (c.url || '#') + '" target="_blank">ورود به سایت</a>' +
+        '<a class="btn" href="' + (c.url || '#') + '">ورود به سایت</a>' +
         '</div>';
     }).join("");
   })
@@ -46,7 +46,6 @@ fetch("websites.json?v=" + Date.now())
   });
 </script>
 
-<!-- جلوگیری از زوم با دو انگشت -->
 <script>
 document.addEventListener('gesturestart', function (e) { e.preventDefault(); });
 document.addEventListener('touchmove', function (e) {
